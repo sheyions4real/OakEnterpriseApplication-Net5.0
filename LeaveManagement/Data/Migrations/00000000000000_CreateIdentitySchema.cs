@@ -22,6 +22,8 @@ namespace LeaveManagement.Data.Migrations
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
                 });
 
+
+            // create a table named AspNetUsers
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
@@ -46,6 +48,8 @@ namespace LeaveManagement.Data.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
+
+
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",

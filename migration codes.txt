@@ -1,0 +1,13 @@
+in a code first approach
+in the nuget package manager console run
+
+update-database				/// this will up update the database with any new configuration
+					// this will make sure the database was created in the first run using the config settings
+			
+
+add-migration ExtendedUserTable 	// this will create a new class named ExtendedUserTable in the migration folder
+
+
+remove-migration 			// to remove the ExtendedUserTable class if you want to make changes to the employee class fields 
+					// eg changing a column to null
+
