@@ -14,6 +14,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using LeaveManagement.Configurations;
+using LeaveManagement.Contracts;
+using LeaveManagement.Repositories;
 
 namespace LeaveManagement
 {
@@ -32,15 +34,29 @@ namespace LeaveManagement
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDatabaseDeveloperPageExceptionFilter();
+
+
 
             // set the identity to use employee which inherits from the IdentityUser class
             services.AddDefaultIdentity<Employee>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews();
+             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+             services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
+
+            // metiond for 
+            // AddScope         --- mixture of both. when its done it disposed g db connection
+            // AddTransicent    --- Create a brand new copy of the class anytime its instantiated (HttpClient)
+            //AddSingleton      --- A single instance of this class is created eg for logging
 
 
             services.AddAutoMapper(typeof(MapperConfig));
+            
+            services.AddControllersWithViews();
+
+
+          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
