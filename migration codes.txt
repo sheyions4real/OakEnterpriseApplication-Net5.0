@@ -1,3 +1,8 @@
+admin password: Passw0rd@123
+username: it-support@oakpensions.com
+
+
+
 in a code first approach
 in the nuget package manager console run
 
@@ -11,3 +16,9 @@ add-migration ExtendedUserTable 	// this will create a new class named ExtendedU
 remove-migration 			// to remove the ExtendedUserTable class if you want to make changes to the employee class fields 
 					// eg changing a column to null
 
+
+
+after adding the RoleSeedingConfiguration, UserSeedingConfiguration and UserRoleSeedConfiguration
+run the migration to update the database
+
+add-migration AddedDefaultRolesUserstoDatabase

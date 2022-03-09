@@ -16,6 +16,8 @@ using AutoMapper;
 using LeaveManagement.Configurations;
 using LeaveManagement.Contracts;
 using LeaveManagement.Repositories;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using LeaveManagement.Services;
 
 namespace LeaveManagement
 {
@@ -40,8 +42,13 @@ namespace LeaveManagement
 
 
             // set the identity to use employee which inherits from the IdentityUser class
-            services.AddDefaultIdentity<Employee>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<Employee>(options => options.SignIn.RequireConfirmedAccount = true) //setting RequireConfirmedAccount=false will not enforce email confirmation
+                .AddRoles<IdentityRole>()               // defining the Identity to use IdentityRole
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            // using papercut email server for test and development enviroment
+            services.AddTransient<IEmailSender>(s => new EmailSender("localhost", 25, "no-reply-leave-mgt@oakpensions.com"));
+
              services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
              services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
 

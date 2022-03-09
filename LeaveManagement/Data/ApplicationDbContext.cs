@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using LeaveManagement.Configurations.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,24 @@ namespace LeaveManagement.Data
         {
         }
 
+        // seeding the identity roles for the application
+        // this method is called when EF is creating the database
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            // setup configuration for the role
+            builder.ApplyConfiguration(new RoleSeedConfiguration());        // the file that contains the role infomation to be seeded    
+            builder.ApplyConfiguration(new UserSeedConfiguration());        // this file will seed the first admin user
+            builder.ApplyConfiguration(new UserRoleConfiguration());        // this will assign the role to the seeded user
+            builder.ApplyConfiguration(new DepartmentSeedConfiguration());  // this well create the departments
+        }
+
+
         // specifies the tables you want to create
         public DbSet<LeaveType> LeaveTypes { get; set; }
         public DbSet<LeaveAllocation> LeaveAllocations { get; set; }
+        public DbSet<Department> Departments { get; set; }
+
 
 
 

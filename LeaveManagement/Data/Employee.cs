@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,9 +15,18 @@ namespace LeaveManagement.Data
         public string Lastname { get; set; }
         public string DepartmentID { get; set; }
         public string? TaxID { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{MM/dd/yyyy}")]
         public DateTime? DateOfBirth { get; set; }
-        public string DateEmployed { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{MM/dd/yyyy}")]
+        public DateTime? DateEmployed { get; set; }
         public string Confirmed { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{MM/dd/yyyy}")]
         public DateTime? DateConfirmed { get; set; }
     }
 }

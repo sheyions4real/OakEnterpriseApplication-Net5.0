@@ -9,20 +9,32 @@ using LeaveManagement.Data;
 using AutoMapper;
 using LeaveManagement.Models;
 using LeaveManagement.Contracts;
+using Microsoft.AspNetCore.Authorization;
+using LeaveManagement.Constants;
 
 namespace LeaveManagement.Controllers
 {
+
+
+
+    [Authorize] // Will allow only loged in   admin and HR users to access this module
     public class LeaveTypesController : Controller
     {
     
         private readonly ILeaveTypeRepository leaveTypeRepository;
         private readonly IMapper _mapper;
 
+       const string admin_And_HR = Roles.Administrator + "," +Roles.HR;
+        
+
         public LeaveTypesController(ILeaveTypeRepository leaveTypeRepository, IMapper mapper)
         {
             this.leaveTypeRepository = leaveTypeRepository;
             this._mapper = mapper;
+
         }
+
+
 
 
 
@@ -34,6 +46,8 @@ namespace LeaveManagement.Controllers
             var leaveTypes = _mapper.Map<List<LeaveTypeVM>>(await leaveTypeRepository.GetAllAsync());
             return View(leaveTypes);
         }
+
+
 
         // GET: LeaveTypes/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -49,15 +63,22 @@ namespace LeaveManagement.Controllers
             return View(leaveTypeVM);
         }
 
+
+        [Authorize(Roles = admin_And_HR)]
         // GET: LeaveTypes/Create
         public IActionResult Create()
         {
             return View();
         }
 
+
+
+
+
         // POST: LeaveTypes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = admin_And_HR)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(LeaveTypeVM leaveTypeVM)
@@ -73,6 +94,11 @@ namespace LeaveManagement.Controllers
             return View(leaveTypeVM);
         }
 
+
+
+
+
+        [Authorize(Roles = admin_And_HR)]
         // GET: LeaveTypes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -88,9 +114,17 @@ namespace LeaveManagement.Controllers
             return View(leaveTypeVM);
         }
 
+
+
+
+
+
+
+
         // POST: LeaveTypes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = admin_And_HR)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, LeaveType leaveTypeVM)
@@ -145,7 +179,14 @@ namespace LeaveManagement.Controllers
 
 
 
+
+
+
+
+
+
         // POST: LeaveTypes/Delete/5
+        [Authorize(Roles = Roles.Administrator)]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
