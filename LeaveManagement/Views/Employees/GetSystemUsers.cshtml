@@ -1,0 +1,169 @@
+﻿@model LeaveManagement.Models.UserByRoles
+
+@{
+    ViewData["Title"] = "System Users By Roles";
+}
+
+<h4>System Users By Roles</h4>
+
+<p>
+    <a class="btn btn-primary btn-sm" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+</p>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <h3>Users</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Users[0].Firstname)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Users[0].Lastname)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Users[0].DateEmployed)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Users)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Firstname)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Lastname)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateEmployed)
+                                </td>
+                                <td>
+                                    @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |*@
+                                    <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                                    @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <h3>HR Staff</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.HR[0].Firstname)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.HR[0].Lastname)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.HR[0].DateEmployed)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.HR)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Firstname)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Lastname)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateEmployed)
+                                </td>
+                                <td>
+                                    @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |*@
+                                    <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                                    @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                                </td>
+                            </tr>
+                        }
+
+                        @if (Model.HR.Count <= 0)
+                        {
+                            <tr>
+                                <td>
+                                    No HR Record Found
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <br /><br />
+                <hr />
+                <br /><br />
+
+                <h3>Supervisors</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Supervisors[0].Firstname)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Supervisors[0].Lastname)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Supervisors[0].DateEmployed)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Supervisors)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Firstname)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Lastname)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateEmployed)
+                                </td>
+                                <td>
+                                    @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |*@
+                                    <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                                    @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                                </td>
+                            </tr>
+                        }
+                        @if (Model.Supervisors.Count <= 0)
+                        {
+                            <tr>
+                                <td>
+                                   No Supervisor Record Found
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+
+        </div>
+    </div>
+
+@section Scripts{
+<script>
+    $(function () {
+        
+    }
+</script>
+}
+    

@@ -9,11 +9,11 @@
     @if (SignInManager.IsSignedIn(User))  // check if the user is signed in
     {
         <li class="nav-item">
-            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><small>Welcome @User.Identity?.Name </small></a>
         </li>
         <li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-link text-white">Logout</button>
+            <form class="form-inline small" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link text-white "><small>Logout</small></button>
             </form>
         </li>
     }

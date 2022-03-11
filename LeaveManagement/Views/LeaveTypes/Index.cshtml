@@ -33,10 +33,11 @@
             </td>
            
             <td>
-                <a class="btn btn-warning  btn-sm" asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i> </a> 
-                <a class="btn btn-info  btn-sm" asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-circle-info"></i> </a> 
+                <button data-id="@item.Id" class="btn btn-primary allocateBtn btn-sm" type="button"><i class="fas fa-square-envelope"></i> Allocate Leave </button>
+                <a class="btn btn-warning  btn-sm" asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i> </a>
+                <a class="btn btn-info  btn-sm" asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-circle-info"></i> </a>
                 @*<a asp-action="Delete" class="btn btn-danger deleteBtn" asp-route-id="@item.Id">Delete</a>*@
-                <button data-id="@item.Id" class="btn btn-danger deleteBtn btn-sm" type="button" ><i class="fas fa-trash-alt"></i> </button>
+                <button data-id="@item.Id" class="btn btn-danger deleteBtn btn-sm" type="button"><i class="fas fa-trash-alt"></i> </button>
             </td>
         </tr>
 }
@@ -48,11 +49,16 @@
 
 </form>
 
+
+
+<form id="allocationForm" asp-controller="LeaveTypes" asp-action="AllocateLeave">
+    <input type="hidden" id="leaveTypeIdAllocation" name="Id" />
+</form>
+
 @section Scripts{ 
     <script>
         $(function () {
-            // initialize the db record to be a datatable
-            $('.table').DataTable();
+       
 
             $('.deleteBtn').click(function (e) {
                 swal({
@@ -73,6 +79,29 @@
                         $('#deleteForm').submit();
                     }
                 });   
+            });
+
+
+
+            $('.allocateBtn').click(function (e) {
+                swal({
+                    title: "Are you sure?",
+                    text: "Are you sure you want to allocate this leave to all employees?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true
+                }).then((confirm) => {
+                    if (confirm) {
+                        //alert("you said yes");
+                        var btn = $(this);
+                        var id = btn.data("id");
+                        // get the value from the button and data-id attribute and assign it to the hidden field of the form and 
+                        // then submit the form
+                        $('#leaveTypeIdAllocation').val(id);
+                        // submit the form to hit the delete endpoint
+                        $('#allocationForm').submit();
+                    }
+                });
             });
 
         });

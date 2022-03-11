@@ -20,18 +20,18 @@ namespace LeaveManagement.Controllers
     [Authorize] // Will allow only loged in   admin and HR users to access this module
     public class LeaveTypesController : Controller
     {
-    
+
         private readonly ILeaveTypeRepository leaveTypeRepository;
         private readonly IMapper _mapper;
+        private readonly ILeaveAllocationRepository leaveAllocationRepository;
+        const string admin_And_HR = Roles.Administrator + "," + Roles.HR;
 
-       const string admin_And_HR = Roles.Administrator + "," +Roles.HR;
-        
 
-        public LeaveTypesController(ILeaveTypeRepository leaveTypeRepository, IMapper mapper)
+        public LeaveTypesController(ILeaveTypeRepository leaveTypeRepository, IMapper mapper, ILeaveAllocationRepository leaveAllocationRepository)
         {
             this.leaveTypeRepository = leaveTypeRepository;
             this._mapper = mapper;
-
+            this.leaveAllocationRepository = leaveAllocationRepository;
         }
 
 
@@ -42,7 +42,7 @@ namespace LeaveManagement.Controllers
         // GET: LeaveTypes
         public async Task<IActionResult> Index()
         {
-           
+
             var leaveTypes = _mapper.Map<List<LeaveTypeVM>>(await leaveTypeRepository.GetAllAsync());
             return View(leaveTypes);
         }
@@ -52,9 +52,9 @@ namespace LeaveManagement.Controllers
         // GET: LeaveTypes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-           
+
             var leaveType = await leaveTypeRepository.GetAsync(id);
-                
+
             if (leaveType == null)
             {
                 return NotFound();
@@ -87,8 +87,8 @@ namespace LeaveManagement.Controllers
             {
                 var leaveType = _mapper.Map<LeaveType>(leaveTypeVM);
                 await leaveTypeRepository.AddAsync(leaveType);
-                
-                
+
+
                 return RedirectToAction(nameof(Index));
             }
             return View(leaveTypeVM);
@@ -102,7 +102,7 @@ namespace LeaveManagement.Controllers
         // GET: LeaveTypes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-          
+
 
             var leaveType = await leaveTypeRepository.GetAsync(id);
             if (leaveType == null)
@@ -144,7 +144,7 @@ namespace LeaveManagement.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (! await LeaveTypeExists(leaveTypeVM.Id))
+                    if (!await LeaveTypeExists(leaveTypeVM.Id))
                     {
                         return NotFound();
                     }
@@ -198,6 +198,24 @@ namespace LeaveManagement.Controllers
         private async Task<bool> LeaveTypeExists(int id)
         {
             return await leaveTypeRepository.Exists(id);
+        }
+
+
+
+
+
+
+
+
+
+
+        // leave allocation method
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AllocateLeave(int id)
+        {
+            await leaveAllocationRepository.LeaveAllocation(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

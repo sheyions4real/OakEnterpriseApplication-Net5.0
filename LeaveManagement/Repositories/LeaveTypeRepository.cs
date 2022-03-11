@@ -11,6 +11,7 @@ namespace LeaveManagement.Repositories
     {
         public LeaveTypeRepository(ApplicationDbContext context) : base(context)
         {
+
         }
     }
 }

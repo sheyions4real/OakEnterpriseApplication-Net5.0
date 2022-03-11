@@ -48,9 +48,14 @@ namespace LeaveManagement
 
             // using papercut email server for test and development enviroment
             services.AddTransient<IEmailSender>(s => new EmailSender("localhost", 25, "no-reply-leave-mgt@oakpensions.com"));
+            //services.AddTransient<ILeaveAllocationRepository, LeaveAllocationRepository>();
 
-             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<ILeaveAllocationRepository, LeaveAllocationRepository>();
              services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
+            services.AddScoped<IEmployeeProfileRepository, EmployeeProfileRepository>();
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            
 
             // metiond for 
             // AddScope         --- mixture of both. when its done it disposed g db connection

@@ -1,0 +1,84 @@
+﻿@model LeaveManagement.Data.LeaveAllocation
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>LeaveAllocation</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DaysAllocated)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DaysAllocated)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DaysUsed)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DaysUsed)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PublicHolidays)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PublicHolidays)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DaysBroughtForward)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DaysBroughtForward)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LeaveType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LeaveType.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EmployeeId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EmployeeId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Period)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Period)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Start_Date)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Start_Date)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.End_Date)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.End_Date)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DateModified)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DateModified)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

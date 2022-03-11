@@ -4,14 +4,16 @@ using LeaveManagement.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LeaveManagement.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220309105349_AddMoreFieldsToLeaveAllocation")]
+    partial class AddMoreFieldsToLeaveAllocation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -265,9 +267,6 @@ namespace LeaveManagement.Data.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("Othernames")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
@@ -307,7 +306,7 @@ namespace LeaveManagement.Data.Migrations
                         {
                             Id = "435f3413-2f18-426f-9f20-944aad0r4623",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "45e28b8c-124a-48ef-b3bb-cb13071872a2",
+                            ConcurrencyStamp = "eddfe3a8-922c-4338-904d-ff201996fa70",
                             Email = "admin@oakpensions.com",
                             EmailConfirmed = true,
                             Firstname = "System",
@@ -315,9 +314,9 @@ namespace LeaveManagement.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@OAKPENSIONS.COM",
                             NormalizedUserName = "ADMIN@OAKPENSIONS.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEX2iN3Cx8SkWThjUIpiDVNJx+uc6IbjZb8wn28nai1SI533GhWrBbp5nO2oQ1VOrA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELvSNnn/73fYWTIwx0TAax5UypmDXHoFFEvBs7pGel3rsgQJLX8N6J7A/PgRgGAalg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "25b8a278-f938-401f-9a54-8677129c074e",
+                            SecurityStamp = "dc59d4f8-41a5-46df-b8b5-ff952f27c927",
                             TwoFactorEnabled = false,
                             UserName = "admin@oakpensions.com"
                         },
@@ -325,7 +324,7 @@ namespace LeaveManagement.Data.Migrations
                         {
                             Id = "a35a3413-2f18-446f-9f30-944aad3r4633",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8bfc0cbb-5c23-4005-8e97-887be0f22c4d",
+                            ConcurrencyStamp = "612db39a-94fb-4104-9c42-94bc0c073c80",
                             Email = "mattewo@oakpensions.com",
                             EmailConfirmed = true,
                             Firstname = "System",
@@ -333,191 +332,11 @@ namespace LeaveManagement.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MATTHEWO@OAKPENSIONS.COM",
                             NormalizedUserName = "MATTHEWO@OAKPENSIONS.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENUdEa33O2sijsyQc+y+huoYUo/OIUzPI4ZEqdmHErqt9LBTq7QwtOr8U5s/A4SAww==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJiilSTLACiPvzOQrh0atzM4WqjAwGb/1caTpIPsql3cA7+2ygVvR76vrgHbXzZM2g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "dfdcdf7c-2313-4913-aa51-d66afe8fdeb4",
+                            SecurityStamp = "0f770024-286f-44e9-a6a5-8fea411afc8e",
                             TwoFactorEnabled = false,
                             UserName = "mattewo@oakpensions.com"
-                        });
-                });
-
-            modelBuilder.Entity("LeaveManagement.Data.EmployeeProfile", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Address1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Address2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Confirmed")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DateConfirmed")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateEmployed")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DepartmentID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Firstname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Lastname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Level_Of_Entry")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("Marital_Status")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Mobile_Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Othernames")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Position")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Rsa_Pin")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TaxID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("branch")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Staff");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "a35a3413-2f18-446f-9f30-944aad3r4633",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "ab1fe58e-3688-4110-b2b7-69efa49f2a29",
-                            DepartmentID = "235f3413-2f18-426f-9f20-944aad3a4623",
-                            Email = "mattewo@oakpensions.com",
-                            EmailConfirmed = false,
-                            Firstname = "Sheyi",
-                            Gender = "Male",
-                            Lastname = "Omagene",
-                            LockoutEnabled = false,
-                            Othernames = "Matthew",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "57628f73-13ae-482f-8dbd-b9907e15034c",
-                            Status = 1,
-                            TaxID = "",
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = "9f6b8d6e-aeb6-4cc4-94d9-06267b8f5410",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "4154bf64-2134-462d-bcb4-f933a4b2a633",
-                            DepartmentID = "235f3413-2f18-426f-9f20-944aad3a4623",
-                            Email = "ijeomam@oakpensions.com",
-                            EmailConfirmed = false,
-                            Firstname = "Ijeoma",
-                            Gender = "Female",
-                            Lastname = "Modungwo",
-                            LockoutEnabled = false,
-                            Othernames = "",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "ba69d2ca-9840-4776-9495-4aef2f961ec0",
-                            Status = 1,
-                            TaxID = "",
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = "a4116b98-ccf0-400f-887d-06f2b4c4ed5a",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "cfb91345-f009-4efb-92c6-d1d9b36d15e6",
-                            DepartmentID = "235f3413-2f18-426f-9f20-944aad3a4623",
-                            Email = "razaqo@oakpensions.com",
-                            EmailConfirmed = false,
-                            Firstname = "Razaq",
-                            Gender = "Male",
-                            Lastname = "Olanipekun",
-                            LockoutEnabled = false,
-                            Othernames = "",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "f8ec3dda-7ce1-40db-a6be-03f1fb321c82",
-                            Status = 1,
-                            TaxID = "",
-                            TwoFactorEnabled = false
                         });
                 });
 
@@ -622,35 +441,35 @@ namespace LeaveManagement.Data.Migrations
                         new
                         {
                             Id = "835f3213-2f18-426f-9f20-144aad0f962b",
-                            ConcurrencyStamp = "a7e0370f-ab01-476b-83f4-78be67a247f0",
+                            ConcurrencyStamp = "9b0336b2-b49e-4445-8524-6057453c6907",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "a25f3213-2f18-426f-9f20-144acd3a962a",
-                            ConcurrencyStamp = "0ac2cf47-e22a-4119-968a-42cda7b543a9",
+                            ConcurrencyStamp = "ccd05bbe-5e5e-41d7-a10d-7a3825faa8d6",
                             Name = "Supervisor",
                             NormalizedName = "SUPERVISOR"
                         },
                         new
                         {
                             Id = "c35a3213-2f18-426f-9f20-144bad0r962c",
-                            ConcurrencyStamp = "12ed929a-a993-4cb4-87fd-86451b3f8d25",
+                            ConcurrencyStamp = "6f827211-3c3c-4561-8ec8-a9d16fad7514",
                             Name = "Group_Head",
                             NormalizedName = "GROUP HEAD"
                         },
                         new
                         {
                             Id = "535f3313-2f38-226f-9a20-174aad0r9625",
-                            ConcurrencyStamp = "b31d30f6-1454-46af-8703-1865e7550c86",
+                            ConcurrencyStamp = "c683b2ef-f7f8-4df4-89ba-f2187fc8fb47",
                             Name = "HR",
                             NormalizedName = "HR MANAGER"
                         },
                         new
                         {
                             Id = "135f3213-2f18-426f-9f20-144aad019621",
-                            ConcurrencyStamp = "c996299a-57c2-4494-a9ac-4db514af30d8",
+                            ConcurrencyStamp = "2fadbc87-8455-441c-a4b6-cb2344c205f1",
                             Name = "User",
                             NormalizedName = "USER"
                         });

@@ -13,7 +13,11 @@ namespace LeaveManagement.Configurations
         public MapperConfig()
         {
             CreateMap<LeaveType, LeaveTypeVM>().ReverseMap();
-
+            CreateMap<Employee, EmployeeVM>().ReverseMap();
+            CreateMap<EmployeeProfile, EmployeeProfileVM>().ReverseMap();
+            CreateMap<EmployeeProfile, EmployeeAllocationVM>().ReverseMap();
+            CreateMap<LeaveAllocation, LeaveAllocationVM>().ReverseMap();
+            CreateMap<LeaveAllocation, LeaveAllocationEditVM>().ReverseMap();
             
 
         }

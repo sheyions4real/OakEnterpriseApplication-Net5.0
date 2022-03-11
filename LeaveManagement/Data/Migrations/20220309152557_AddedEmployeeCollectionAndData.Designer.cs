@@ -4,14 +4,16 @@ using LeaveManagement.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LeaveManagement.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220309152557_AddedEmployeeCollectionAndData")]
+    partial class AddedEmployeeCollectionAndData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -307,7 +309,7 @@ namespace LeaveManagement.Data.Migrations
                         {
                             Id = "435f3413-2f18-426f-9f20-944aad0r4623",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "45e28b8c-124a-48ef-b3bb-cb13071872a2",
+                            ConcurrencyStamp = "521d2bc0-a6b1-4fef-934a-de8a424dc66a",
                             Email = "admin@oakpensions.com",
                             EmailConfirmed = true,
                             Firstname = "System",
@@ -315,9 +317,9 @@ namespace LeaveManagement.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@OAKPENSIONS.COM",
                             NormalizedUserName = "ADMIN@OAKPENSIONS.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEX2iN3Cx8SkWThjUIpiDVNJx+uc6IbjZb8wn28nai1SI533GhWrBbp5nO2oQ1VOrA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKci7jx4upRCFA3mHpsDl3zND5XB8QWzWgt2CrBgtrrS+p+uPW47CsrEOG63rHBZgw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "25b8a278-f938-401f-9a54-8677129c074e",
+                            SecurityStamp = "1a0cac22-9e45-4406-92b5-19fed36a4089",
                             TwoFactorEnabled = false,
                             UserName = "admin@oakpensions.com"
                         },
@@ -325,7 +327,7 @@ namespace LeaveManagement.Data.Migrations
                         {
                             Id = "a35a3413-2f18-446f-9f30-944aad3r4633",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8bfc0cbb-5c23-4005-8e97-887be0f22c4d",
+                            ConcurrencyStamp = "73d53aef-5473-4b7f-b162-060ddc22f4ba",
                             Email = "mattewo@oakpensions.com",
                             EmailConfirmed = true,
                             Firstname = "System",
@@ -333,15 +335,86 @@ namespace LeaveManagement.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MATTHEWO@OAKPENSIONS.COM",
                             NormalizedUserName = "MATTHEWO@OAKPENSIONS.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENUdEa33O2sijsyQc+y+huoYUo/OIUzPI4ZEqdmHErqt9LBTq7QwtOr8U5s/A4SAww==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHB1GWd7VGymOpR5vZuQQGR8Mhj0FZIa25I8tj/Sm/jZgBMs4/ytArBWqiP/DteQvA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "dfdcdf7c-2313-4913-aa51-d66afe8fdeb4",
+                            SecurityStamp = "50b8fe7e-06f2-4548-8e59-59308bab8548",
                             TwoFactorEnabled = false,
                             UserName = "mattewo@oakpensions.com"
                         });
                 });
 
-            modelBuilder.Entity("LeaveManagement.Data.EmployeeProfile", b =>
+            modelBuilder.Entity("LeaveManagement.Data.LeaveAllocation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DaysAllocated")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DaysBroughtForward")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DaysUsed")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EmployeeId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("End_Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LeaveTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Period")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PublicHolidays")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Start_Date")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LeaveTypeId");
+
+                    b.ToTable("LeaveAllocations");
+                });
+
+            modelBuilder.Entity("LeaveManagement.Data.LeaveType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DefaultDays")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LeaveTypes");
+                });
+
+            modelBuilder.Entity("LeaveManagement.Data.Staff", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -466,7 +539,7 @@ namespace LeaveManagement.Data.Migrations
                         {
                             Id = "a35a3413-2f18-446f-9f30-944aad3r4633",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ab1fe58e-3688-4110-b2b7-69efa49f2a29",
+                            ConcurrencyStamp = "816e8d90-069c-4beb-a3e5-a2828b04821f",
                             DepartmentID = "235f3413-2f18-426f-9f20-944aad3a4623",
                             Email = "mattewo@oakpensions.com",
                             EmailConfirmed = false,
@@ -476,7 +549,7 @@ namespace LeaveManagement.Data.Migrations
                             LockoutEnabled = false,
                             Othernames = "Matthew",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "57628f73-13ae-482f-8dbd-b9907e15034c",
+                            SecurityStamp = "af35996d-e949-4e01-89fb-df43139666dc",
                             Status = 1,
                             TaxID = "",
                             TwoFactorEnabled = false
@@ -485,7 +558,7 @@ namespace LeaveManagement.Data.Migrations
                         {
                             Id = "9f6b8d6e-aeb6-4cc4-94d9-06267b8f5410",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4154bf64-2134-462d-bcb4-f933a4b2a633",
+                            ConcurrencyStamp = "f2252024-6daf-4b6a-b466-3653ad09d3bd",
                             DepartmentID = "235f3413-2f18-426f-9f20-944aad3a4623",
                             Email = "ijeomam@oakpensions.com",
                             EmailConfirmed = false,
@@ -495,7 +568,7 @@ namespace LeaveManagement.Data.Migrations
                             LockoutEnabled = false,
                             Othernames = "",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ba69d2ca-9840-4776-9495-4aef2f961ec0",
+                            SecurityStamp = "682252fc-45e2-440b-93fe-e70f31e82751",
                             Status = 1,
                             TaxID = "",
                             TwoFactorEnabled = false
@@ -504,7 +577,7 @@ namespace LeaveManagement.Data.Migrations
                         {
                             Id = "a4116b98-ccf0-400f-887d-06f2b4c4ed5a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cfb91345-f009-4efb-92c6-d1d9b36d15e6",
+                            ConcurrencyStamp = "c3f69dcd-31dd-49b6-bebb-123c32c64951",
                             DepartmentID = "235f3413-2f18-426f-9f20-944aad3a4623",
                             Email = "razaqo@oakpensions.com",
                             EmailConfirmed = false,
@@ -514,82 +587,11 @@ namespace LeaveManagement.Data.Migrations
                             LockoutEnabled = false,
                             Othernames = "",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f8ec3dda-7ce1-40db-a6be-03f1fb321c82",
+                            SecurityStamp = "a55d5b76-2d5a-4f5a-9bb9-5c07396f4aba",
                             Status = 1,
                             TaxID = "",
                             TwoFactorEnabled = false
                         });
-                });
-
-            modelBuilder.Entity("LeaveManagement.Data.LeaveAllocation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DaysAllocated")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DaysBroughtForward")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DaysUsed")
-                        .HasColumnType("int");
-
-                    b.Property<string>("EmployeeId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("End_Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("LeaveTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Period")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PublicHolidays")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("Start_Date")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LeaveTypeId");
-
-                    b.ToTable("LeaveAllocations");
-                });
-
-            modelBuilder.Entity("LeaveManagement.Data.LeaveType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DefaultDays")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LeaveTypes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -622,35 +624,35 @@ namespace LeaveManagement.Data.Migrations
                         new
                         {
                             Id = "835f3213-2f18-426f-9f20-144aad0f962b",
-                            ConcurrencyStamp = "a7e0370f-ab01-476b-83f4-78be67a247f0",
+                            ConcurrencyStamp = "91121d47-35a0-4315-8b7c-6e851c847b19",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "a25f3213-2f18-426f-9f20-144acd3a962a",
-                            ConcurrencyStamp = "0ac2cf47-e22a-4119-968a-42cda7b543a9",
+                            ConcurrencyStamp = "3c82f1da-67fb-4b4a-945a-ed1e2006296b",
                             Name = "Supervisor",
                             NormalizedName = "SUPERVISOR"
                         },
                         new
                         {
                             Id = "c35a3213-2f18-426f-9f20-144bad0r962c",
-                            ConcurrencyStamp = "12ed929a-a993-4cb4-87fd-86451b3f8d25",
+                            ConcurrencyStamp = "d36cde27-770c-41ff-a5a4-4e22b3998d20",
                             Name = "Group_Head",
                             NormalizedName = "GROUP HEAD"
                         },
                         new
                         {
                             Id = "535f3313-2f38-226f-9a20-174aad0r9625",
-                            ConcurrencyStamp = "b31d30f6-1454-46af-8703-1865e7550c86",
+                            ConcurrencyStamp = "b7d21719-8013-4224-8a88-ba15a0d9debc",
                             Name = "HR",
                             NormalizedName = "HR MANAGER"
                         },
                         new
                         {
                             Id = "135f3213-2f18-426f-9f20-144aad019621",
-                            ConcurrencyStamp = "c996299a-57c2-4494-a9ac-4db514af30d8",
+                            ConcurrencyStamp = "dee99b31-2e50-4782-bfe9-7941e4bd4e43",
                             Name = "User",
                             NormalizedName = "USER"
                         });
