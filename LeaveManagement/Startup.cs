@@ -18,6 +18,7 @@ using LeaveManagement.Contracts;
 using LeaveManagement.Repositories;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using LeaveManagement.Services;
+using Serilog;
 
 namespace LeaveManagement
 {
@@ -46,6 +47,9 @@ namespace LeaveManagement
                 .AddRoles<IdentityRole>()               // defining the Identity to use IdentityRole
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+
+
+            services.AddHttpContextAccessor(); // this service will allow u use the httpcontextaccessor object to access the login user and user emp id and department id
             // using papercut email server for test and development enviroment
             services.AddTransient<IEmailSender>(s => new EmailSender("localhost", 25, "no-reply-leave-mgt@oakpensions.com"));
             //services.AddTransient<ILeaveAllocationRepository, LeaveAllocationRepository>();
@@ -55,7 +59,7 @@ namespace LeaveManagement
              services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
             services.AddScoped<IEmployeeProfileRepository, EmployeeProfileRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-            
+            services.AddScoped<ILeaveRequestRepository, LeaveRequestRepository>();
 
             // metiond for 
             // AddScope         --- mixture of both. when its done it disposed g db connection
@@ -64,7 +68,16 @@ namespace LeaveManagement
 
 
             services.AddAutoMapper(typeof(MapperConfig));
-            
+
+
+            // Add Serilog middle ware to Host in  Program.cs file for .net core 5.0
+            // add seri log middleware in .net core 6
+ 
+            //builder.Host.UseSerilog((ctx, lc) =>
+            //lc.WriteTo.Console()
+            //.ReadFrom.Configuration(ctx.Configuration));
+
+
             services.AddControllersWithViews();
 
 
@@ -85,6 +98,8 @@ namespace LeaveManagement
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseSerilogRequestLogging();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

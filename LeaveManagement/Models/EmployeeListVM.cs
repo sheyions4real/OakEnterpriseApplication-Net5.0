@@ -14,6 +14,9 @@ namespace LeaveManagement.Models
         [Display(Name = "First Name")]
         public string Firstname { get; set; }
         [Display(Name = "Last Name")]
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public string Lastname { get; set; }
         [Display(Name = "Date Employed")]
         public string DateEmployed { get; set; }
@@ -37,7 +40,17 @@ namespace LeaveManagement.Models
         public string Lastname { get; set; }
         public string Othernames { get; set; }
         public string DepartmentID { get; set; }
+
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [Display(Name = "Date Employed")]
         public string DateEmployed { get; set; }
+
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [Display(Name = "Date Confirmed")]
         public string DateConfirmed { get; set; }
     }
 

@@ -9,5 +9,8 @@ namespace LeaveManagement.Contracts
     public interface IEmployeeProfileRepository : IGenericRepository<EmployeeProfile>
     {
         Task<EmployeeProfile> GetEmployeeProfile(string id);
+
+        public  Task<List<Employee>> GetUsersInRole(string role);
+        
     }
 }

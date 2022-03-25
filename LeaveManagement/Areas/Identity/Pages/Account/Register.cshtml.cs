@@ -15,6 +15,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using LeaveManagement.Constants;
+using LeaveManagement.Contracts;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LeaveManagement.Areas.Identity.Pages.Account
 {
@@ -24,17 +27,26 @@ namespace LeaveManagement.Areas.Identity.Pages.Account
         private readonly SignInManager<Employee> _signInManager;
         private readonly UserManager<Employee> _userManager;
         private readonly ILogger<RegisterModel> _logger;
+        private readonly IEmployeeProfileRepository employeeProfileRepository;
+        private readonly IDepartmentRepository departmentRepository;
+        private readonly IMapper mapper;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<Employee> userManager,  // handle access to all the user objects
             SignInManager<Employee> signInManager,  // handles all sign in and token generation operations
             ILogger<RegisterModel> logger,          // logger
+            IEmployeeProfileRepository employeeProfileRepository,
+            IDepartmentRepository departmentRepository,
+            IMapper mapper,
             IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            this.employeeProfileRepository = employeeProfileRepository;
+            this.departmentRepository = departmentRepository;
+            this.mapper = mapper;
             _emailSender = emailSender;
         }
 
@@ -60,6 +72,9 @@ namespace LeaveManagement.Areas.Identity.Pages.Account
 
             [Display(Name = "Department")]
             public string Department { get; set; }
+            public SelectList DeptList { get; set; }
+
+
 
             [Display(Name = "Date Of Birth")]
             [DataType(DataType.Date)]
@@ -100,6 +115,34 @@ namespace LeaveManagement.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            List<SelectListItem> list = new List<SelectListItem>();
+
+            var departments = await departmentRepository.GetAllAsync();
+         
+
+            foreach (var item in departments)
+            {
+                list.Add(new SelectListItem() { Text = item.Name, Value = item.Id });
+            }
+            //list.Add(new SelectListItem() { Text = "Customer Care", Value = "535f3413-5f18-426f-9f20-944aad334523" });
+            //list.Add(new SelectListItem() { Text = "Operations", Value = "135f3413-2f18-426f-9f20-944aa1314623" });
+            //list.Add(new SelectListItem() { Text = "ICT", Value = "235f3413-2f18-426f-9f20-944aad3a4623" });
+
+            //list.Add(new SelectListItem() { Text = "Benefit", Value = "335f3413-2f18-426f-9f20-944aad323623" });
+            //list.Add(new SelectListItem() { Text = "BDRM", Value = "435f3413-2f18-426f-9f20-544aad364623" });
+            //list.Add(new SelectListItem() { Text = "FINCON", Value = "435f3413-2f18-426f-9f20-944aa4344643" });
+
+            //list.Add(new SelectListItem() { Text = "Internal Audit", Value = "535f3413-2f18-456f-9f20-944aad544623" });
+            //list.Add(new SelectListItem() { Text = "Investment", Value = "a35f3413-2f18-42af-9f20-94aaad394623" });
+            //list.Add(new SelectListItem() { Text = "HR/Admin", Value = "a35f3413-5f18-426f-6f20-944aa6314623" });
+
+
+            //list.Add(new SelectListItem() { Text = "Legal", Value = "b35f3413-2f18-4b6f-9f20-944bbd334623" });
+            //list.Add(new SelectListItem() { Text = "Compliance", Value = "a35f3413-2fa8-426f-9f20-944aad3r4623" });
+            //list.Add(new SelectListItem() { Text = "MD Office", Value = "c35f3413-2318-426f-9e20-944aad3r46c3" });
+
+            ViewData["DeptList"] = list;
+
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -129,6 +172,11 @@ namespace LeaveManagement.Areas.Identity.Pages.Account
                     // assign role to the user
                     await _userManager.AddToRoleAsync(user, Roles.User);
 
+
+                    // save user to staff table
+                    var staff = mapper.Map<EmployeeProfile>(user);
+
+                    await employeeProfileRepository.AddAsync(staff);
 
 
                     // generate token to be sent via email to user email for confirmation

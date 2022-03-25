@@ -7,6 +7,10 @@ namespace LeaveManagement.Models
         [Required]
         public int Id { get; set; }
 
+        [Required]
+        [Display(Name = "Employee ID")]
+        public string EmployeeId { get; set; }
+
 
         [Display(Name = "Day Alocated")]
         [Required]
@@ -32,6 +36,7 @@ namespace LeaveManagement.Models
         public int Period { get; set; }
 
         public LeaveTypeVM LeaveType { get; set; }
+
 
     }
 }

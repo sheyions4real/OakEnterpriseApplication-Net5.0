@@ -40,6 +40,18 @@ namespace LeaveManagement.Configurations.Entities
                        Id = "135f3213-2f18-426f-9f20-144aad019621",
                        Name = Roles.User,
                        NormalizedName = Roles.User.ToUpper()
+                   },
+                   new IdentityRole
+                   {
+                       Id = "992f3213-2f18-426f-9f30-144aad219289",
+                       Name = Roles.ED,
+                       NormalizedName = Roles.ED.ToUpper()
+                   },
+                   new IdentityRole
+                   {
+                       Id = "785f3813-2f18-426f-9820-144aad719899",
+                       Name = Roles.MD,
+                       NormalizedName = Roles.MD.ToUpper()
                    }
             );
         }

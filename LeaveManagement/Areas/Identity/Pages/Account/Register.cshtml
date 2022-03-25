@@ -35,6 +35,14 @@
 
 
             <div class="form-group">
+                <label asp-for="Input.Department"></label>
+                <select asp-for="Input.Department" class="form-control" asp-items="ViewBag.DeptList"></select>
+                <span asp-validation-for="Input.Department" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
                 <label asp-for="Input.Date_Employed"></label>
                 <input asp-for="Input.Date_Employed" class="form-control" />
                 <span asp-validation-for="Input.Date_Employed" class="text-danger"></span>

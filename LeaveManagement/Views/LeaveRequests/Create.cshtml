@@ -1,0 +1,178 @@
+﻿@model LeaveManagement.Models.LeaveRequestCreateVM
+
+@{
+    ViewData["Title"] = "Create";
+
+    int Year = DateTime.Now.Year - 1;
+    List<SelectListItem> list = new List<SelectListItem>();
+    for(int i=0; i<10; i++)
+    {
+        list.Add(new SelectListItem { Text=(Year + i).ToString(), Value=(Year + i).ToString() });
+    }
+    Model.LeaveYearList = new SelectList(list, "Value", "Text", null);
+
+}
+
+<h4>Apply For Leave</h4>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="row">
+
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="form-group">
+                        <label asp-for="LeaveTypeId" class="control-label"></label>
+                        <select asp-for="LeaveTypeId" class="form-control" asp-items="Model?.LeaveTypes"></select>
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="form-group">
+                        <label asp-for="LeaveYear" class="control-label"></label>
+                        <select asp-for="LeaveYear" class="form-control" asp-items="Model?.LeaveYearList"></select>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="form-group">
+                        <label asp-for="TotalDaysRequested" class="control-label"></label>
+                        <input asp-for="TotalDaysRequested" class="form-control" />
+                        <span asp-validation-for="TotalDaysRequested" class="text-danger"></span>
+
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="form-group">
+                        <label asp-for="TotalPublicHolidays" class="control-label"></label>
+                        <input asp-for="TotalPublicHolidays" class="form-control" />
+                        <span asp-validation-for="TotalPublicHolidays" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="form-group">
+                        <label asp-for="TotalOutstanding" class="control-label"></label>
+                        <input asp-for="TotalOutstanding" class="form-control" />
+                        <span asp-validation-for="TotalOutstanding" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+
+          
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="form-group">
+                        <label asp-for="StartDate" class="control-label"></label>
+                        <input asp-for="StartDate" class="form-control" />  <!--datepicker" />-->
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="form-group">
+                        <label asp-for="EndDate" class="control-label"></label>
+                        <input asp-for="EndDate" class="form-control" />  <!--datepicker" />-->
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <div class="form-group">
+                        <label asp-for="Comment" class="control-label"></label>
+
+                        <textarea asp-for="Comment" class="form-control"></textarea>
+                        <span asp-validation-for="Comment" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="form-group">
+                        <label asp-for="RelieverID" class="control-label"></label>
+                        <select asp-for="RelieverID" class="form-control" asp-items="Model?.Relievers">
+                            <option>Select Reliever</option>
+                        </select>
+
+                        @*<input asp-for="RelieverID" class="form-control" />*@
+                        <span asp-validation-for="RelieverID" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="form-group">
+                        <label asp-for="SupervisorEmployeeId" class="control-label"></label>
+                        <select asp-for="SupervisorEmployeeId" class="form-control" asp-items="Model?.Supervisors">
+                            <option>Select Supervisor</option>
+                        </select>
+
+                        @*<input asp-for="SupervisorEmployeeId" class="form-control" />*@
+                        <span asp-validation-for="SupervisorEmployeeId" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="form-group">
+                        <label asp-for="GroupHeadEmployeeId" class="control-label"></label>
+                        <select asp-for="GroupHeadEmployeeId" class="form-control" asp-items="Model?.GroupHeads">
+                            <option>Select Group Head</option>
+                        </select>
+
+                        @*<input asp-for="GroupHeadEmployeeId" class="form-control" />*@
+                        <span asp-validation-for="GroupHeadEmployeeId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <input type="hidden" asp-for="HREmployeeId" class="form-control" />
+                <input type="hidden" asp-for="EDEmployeeId" class="form-control" />
+                <input type="hidden" asp-for="MDEmployeeId" class="form-control" />
+
+
+                @*<div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="form-group">
+                <label asp-for="DateCreated" class="control-label"></label>
+                <input asp-for="DateCreated" class="form-control" />
+                <span asp-validation-for="DateCreated" class="text-danger"></span>
+            </div>
+        </div>*@
+            </div>
+            <div class="row">
+                @*<div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="DateModified" class="control-label"></label>
+                    <input asp-for="DateModified" class="form-control" />
+                    <span asp-validation-for="DateModified" class="text-danger"></span>
+                </div>
+            </div>*@
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <a class="btn btn-dark" asp-action="MyLeave">Back to List</a>
+                        <input type="submit" value="Submit Application" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,458 @@
+﻿@model LeaveManagement.Models.LeaveRequestVM
+
+@{
+    ViewData["Title"] = "Edit";
+
+    List<SelectListItem> approvalItems = new List<SelectListItem>
+{
+        new SelectListItem { Text="Approved", Value="True" },
+        new SelectListItem { Text="Rejected", Value="False" }
+    };
+
+
+    SelectList selectApproval = new SelectList(approvalItems, "Value", "Text", null);
+
+}
+<h3>Edit Leave Request</h3>
+
+<h4>Approve or Reject Leave Application Request</h4>
+
+<hr />
+
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+    <div class="row">
+
+
+
+
+
+        <input type="hidden" asp-for="EmployeeId" class="form-control" />
+
+
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="form-group">
+                <label asp-for="LeaveTypeId" class="control-label"></label>
+                <select asp-for="LeaveTypeId" class="form-control" asp-items="ViewBag.LeaveTypeId"></select>
+                <span asp-validation-for="LeaveTypeId" class="text-danger"></span>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="form-group">
+                <label asp-for="TotalDaysRequested" class="control-label"></label>
+                <input asp-for="TotalDaysRequested" class="form-control" />
+                <span asp-validation-for="TotalDaysRequested" class="text-danger"></span>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="form-group">
+                <label asp-for="TotalOutstanding" class="control-label"></label>
+                <input asp-for="TotalOutstanding" class="form-control" />
+                <span asp-validation-for="TotalOutstanding" class="text-danger"></span>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="form-group">
+                <label asp-for="TotalPublicHolidays" class="control-label"></label>
+                <input asp-for="TotalPublicHolidays" class="form-control" />
+                <span asp-validation-for="TotalPublicHolidays" class="text-danger"></span>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="form-group">
+                <label asp-for="LeaveYear" class="control-label"></label>
+                <input asp-for="LeaveYear" class="form-control" />
+                <span asp-validation-for="LeaveYear" class="text-danger"></span>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+        </div>
+
+
+        <input type="hidden" asp-for="DateRequested" class="form-control" />
+
+
+
+        <input type="hidden" asp-for="RelieverID" class="form-control" />
+
+
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="form-group">
+                <label asp-for="Comment" class="control-label"></label>
+                <input asp-for="Comment" class="form-control" />
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+        </div>
+
+        @if (Model.LoggedInUser.Id == Model.SupervisorEmployeeId)
+        {
+
+
+
+            <input type="hidden" asp-for="SupervisorEmployeeId" class="form-control" />
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="SupervisorApproval" class="control-label"></label>
+                    <select asp-for="SupervisorApproval" asp-items="selectApproval" class="form-control">
+                        <option>Select Approval Option</option>
+                    </select>
+                    <span asp-validation-for="SupervisorApproval" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="SupervisorComment" class="control-label"></label>
+                    <input asp-for="SupervisorComment" class="form-control" />
+                    <span asp-validation-for="SupervisorComment" class="text-danger"></span>
+                </div>
+            </div>
+        }
+        else
+        {
+
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="SupervisorApproval" class="control-label"></label>
+                    <select asp-for="SupervisorApproval" asp-items="selectApproval" class="form-control" disabled>
+                        <option>Select Approval Option</option>
+                    </select>
+                    <span asp-validation-for="SupervisorApproval" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="SupervisorComment" class="control-label"></label>
+                    <input asp-for="SupervisorComment" class="form-control" disabled />
+                    <span asp-validation-for="SupervisorComment" class="text-danger"></span>
+                </div>
+            </div>
+
+            <input type="hidden" id="SupervisorApproval" name="SupervisorApproval" asp-for="SupervisorApproval" value="@Model.SupervisorApproval" />
+            <input type="hidden" id="SupervisorEmployeeId" asp-for="SupervisorEmployeeId" name="SupervisorEmployeeId" value="@Model.SupervisorEmployeeId" />
+            <input type="hidden" id="SupervisorComment" asp-for="SupervisorComment" name="SupervisorComment" value="@Model.SupervisorComment" />
+        }
+
+
+
+        @if (Model.LoggedInUser.Id == Model.HREmployeeId)
+        {
+
+            <input type="hidden" asp-for="HREmployeeId" class="form-control" />
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="HRApproval" class="control-label"></label>
+                    <select asp-for="HRApproval" asp-items="selectApproval" class="form-control">
+                        <option>Select Approval Option</option>
+                    </select>
+                    <span asp-validation-for="HRApproval" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="HRComment" class="control-label"></label>
+                    <input asp-for="HRComment" class="form-control" />
+                    <span asp-validation-for="HRComment" class="text-danger"></span>
+                </div>
+            </div>
+        }
+        else
+        {
+
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="HRApproval" class="control-label"></label>
+                    <select asp-for="HRApproval" asp-items="selectApproval" class="form-control" disabled>
+                        <option>Select Approval Option</option>
+                    </select>
+                    <span asp-validation-for="HRApproval" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="HRComment" class="control-label"></label>
+                    <input asp-for="HRComment" class="form-control" disabled />
+                    <span asp-validation-for="HRComment" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <input type="hidden" id="HREmployeeId" name="HREmployeeId" asp-for="HREmployeeId" value="@Model.HREmployeeId" class="form-control" />
+            <input type="hidden" id="HRApproval" name="HRApproval" asp-for="HRApproval" value="@Model.HRApproval" class="form-control" />
+            <input type="hidden" id="HRComment" name="HRComment" asp-for="HRComment" value="@Model.HRComment" class="form-control" />
+        }
+
+
+
+        @if (Model.LoggedInUser.Id == Model.GroupHeadEmployeeId)
+        {
+
+
+            <input type="hidden" asp-for="GroupHeadEmployeeId" class="form-control" />
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="GroupHeadApproval" class="control-label"></label>
+                    <select asp-for="GroupHeadApproval" asp-items="selectApproval" class="form-control">
+                        <option>Select Approval Option</option>
+                    </select>
+                    <span asp-validation-for="GroupHeadApproval" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="GHComment" class="control-label"></label>
+                    <input asp-for="GHComment" class="form-control" />
+                    <span asp-validation-for="GHComment" class="text-danger"></span>
+                </div>
+            </div>
+
+        }
+        else
+        {
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="GroupHeadApproval" class="control-label"></label>
+                    <select asp-for="GroupHeadApproval" asp-items="selectApproval" class="form-control" disabled>
+                        <option>Select Approval Option</option>
+                    </select>
+                    <span asp-validation-for="GroupHeadApproval" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="GHComment" class="control-label"></label>
+                    <input asp-for="GHComment" class="form-control" disabled />
+                    <span asp-validation-for="GHComment" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <input type="hidden" id="GroupHeadEmployeeId" name="GroupHeadEmployeeId" value="@Model.GroupHeadEmployeeId" class="form-control" />
+            <input type="hidden" id="GroupHeadApproval" name="GroupHeadApproval" asp-for="GroupHeadApproval" value="@Model.GroupHeadApproval" class="form-control" />
+            <input type="hidden" id="GHComment" name="GHComment" asp-for="GHComment" value="@Model.GHComment" class="form-control" />
+        }
+
+
+
+        @if (Model.LoggedInUser.Id == Model.EDEmployeeId)
+        {
+
+
+            <input type="hidden" asp-for="EDEmployeeId" class="form-control" />
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="EDApproval" class="control-label"></label>
+                    <select asp-for="EDApproval" asp-items="selectApproval" class="form-control">
+                        <option>Select Approval Option</option>
+                    </select>
+                    <span asp-validation-for="EDApproval" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="EDComment" class="control-label"></label>
+                    <input asp-for="EDComment" class="form-control" />
+                    <span asp-validation-for="EDComment" class="text-danger"></span>
+                </div>
+            </div>
+
+
+        }
+        else
+        {
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="EDApproval" class="control-label"></label>
+                    <select asp-for="EDApproval" asp-items="selectApproval" class="form-control" disabled>
+                        <option>Select Approval Option</option>
+                    </select>
+                    <span asp-validation-for="EDApproval" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="EDComment" class="control-label"></label>
+                    <input asp-for="EDComment" class="form-control" disabled />
+                    <span asp-validation-for="EDComment" class="text-danger"></span>
+                </div>
+            </div>
+
+            <input type="hidden" id="EDEmployeeId" name="EDEmployeeId" asp-for="EDEmployeeId" value="@Model.EDEmployeeId" class="form-control" />
+            <input type="hidden" id="EDApproval" name="EDApproval"  asp-for="EDApproval" value="@Model.EDApproval" class="form-control" />
+            <input type="hidden" id="EDComment" name="EDComment" asp-for="EDComment"  value="@Model.EDComment" class="form-control" />
+        }
+
+
+
+
+        @if (Model.LoggedInUser.Id == Model.MDEmployeeId)
+        {
+
+
+            <input type="hidden" asp-for="MDEmployeeId" class="form-control" />
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="MDApproval" class="control-label"></label>
+                    <select asp-for="MDApproval" asp-items="selectApproval" class="form-control">
+                        <option>Select Approval Option</option>
+                    </select>
+                    <span asp-validation-for="MDApproval" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="MDComment" class="control-label"></label>
+                    <input asp-for="MDComment" class="form-control" />
+                    <span asp-validation-for="MDComment" class="text-danger"></span>
+                </div>
+            </div>
+
+        }
+        else
+        {
+
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="MDApproval" class="control-label"></label>
+                    <select asp-for="MDApproval" asp-items="selectApproval" class="form-control" disabled>
+                        <option>Select Approval Option</option>
+                    </select>
+                    <span asp-validation-for="MDApproval" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="MDComment" class="control-label"></label>
+                    <input asp-for="MDComment" class="form-control" disabled />
+                    <span asp-validation-for="MDComment" class="text-danger"></span>
+                </div>
+            </div>
+
+            <input type="hidden" id="MDEmployeeId" name="MDEmployeeId" asp-for="MDEmployeeId" value="@Model.MDEmployeeId" class="form-control" />
+            <input type="hidden" id="MDApproval" name="MDApproval" asp-for="MDApproval" value="@Model.MDApproval" class="form-control" />
+            <input type="hidden" id="MDComment" name="MDComment" asp-for="MDComment" value="@Model.MDComment" class="form-control" />
+        }
+
+
+
+
+
+
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="form-group">
+                <label asp-for="Approved" class="control-label"></label>
+                <input asp-for="Approved" class="form-control" disabled />
+                <input type="hidden" asp-for="Approved" class="form-control" />
+                <span asp-validation-for="Approved" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Cancelled" /> @Html.DisplayNameFor(model => model.Cancelled)
+                </label>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="DateCreated" class="control-label"></label>
+                <input asp-for="DateCreated" class="form-control" />
+                <span asp-validation-for="DateCreated" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <div class="form-group">
+                <label asp-for="DateModified" class="control-label"></label>
+                <input asp-for="DateModified" class="form-control" />
+                <span asp-validation-for="DateModified" class="text-danger"></span>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <div>
+
+                <a asp-action="Index" asp-controller="Home" class="btn btn-dark"> <i class="fa fa-arrow-left-long"></i> Back to List</a>
+                @if ((Model.Approved != true || Model.Approved == null) || (Model.Cancelled == true))
+                {
+                    <input type="submit" value="Save Leave Update" class="btn btn-primary" />
+                }
+
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
+
+

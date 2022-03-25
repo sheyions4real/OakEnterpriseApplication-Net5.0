@@ -4,7 +4,10 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace LeaveManagement.Data
 {
@@ -13,6 +16,39 @@ namespace LeaveManagement.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+        }
+
+        // for database auditing.. this method will run anytime th savechangesasync method is called
+        // implement some things before saving
+
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        {
+
+            // track the entries and check the data entry class type or model that it want to execute to the database
+            // this will filter the change tracker to only when its add and update operation
+            foreach (var entry in base.ChangeTracker.Entries<BaseEntity>().Where(q => q.State == EntityState.Added || q.State == EntityState.Modified))
+            {
+                entry.Entity.DateModified = DateTime.Now;
+                // check if the operation is adding to db and then set the dateCreated
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Entity.DateCreated = DateTime.Now;
+                }
+            }
+
+
+            //    foreach (var entry in base.ChangeTracker.Entries<BaseEntity>())
+            //{
+                
+            //    entry.Entity.DateModified = DateTime.Now;
+            //    // check if the operation is adding to db and then set the dateCreated
+            //    if(entry.State == EntityState.Added)
+            //    {
+            //            entry.Entity.DateCreated = DateTime.Now;
+            //    }
+           // }
+           
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
 
         // seeding the identity roles for the application
@@ -42,10 +78,12 @@ namespace LeaveManagement.Data
         public DbSet<LeaveAllocation> LeaveAllocations { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<EmployeeProfile> Staff { get; set; }
-        public DbSet<LeaveManagement.Models.LeaveAllocationEditVM> LeaveAllocationEditVM { get; set; }
-        
-      
-        
+
+        public DbSet<LeaveRequest> LeaveRequests { get; set; }
+
+        public DbSet<PublicHolidays> PublicHolidays { get; set; }
+
+
 
 
 

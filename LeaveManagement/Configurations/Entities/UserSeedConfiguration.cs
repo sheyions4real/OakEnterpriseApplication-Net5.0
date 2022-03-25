@@ -27,9 +27,9 @@ namespace LeaveManagement.Configurations.Entities
                     {
                         Id = "a35a3413-2f18-446f-9f30-944aad3r4633",
                         Email = "mattewo@oakpensions.com",
-                        NormalizedEmail = "MATTHEWO@OAKPENSIONS.COM",
+                        NormalizedEmail = "MATTEWO@OAKPENSIONS.COM",
                         UserName = "mattewo@oakpensions.com",
-                        NormalizedUserName = "MATTHEWO@OAKPENSIONS.COM",
+                        NormalizedUserName = "MATTEWO@OAKPENSIONS.COM",
                         Firstname = "System",
                         Lastname = "User",
                         PasswordHash = hasher.HashPassword(null, "Password@123"),

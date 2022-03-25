@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h3> My Leave Dashboard</h3>
+<h3> Leave Manager Dashboard</h3>
 
 
 <div class="row">
@@ -58,13 +58,13 @@
 <hr />
 
 
-<h3>My Leave Records</h3>
 
+<h3> My Leave Records</h3>
 <table class="table">
     <thead>
         <tr>
             <th>
-                Employee
+               Employee
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LeaveRequests[0].LeaveType.Name)
@@ -81,91 +81,94 @@
             <th>
                 @Html.DisplayNameFor(model => model.LeaveRequests[0].RelieverID)
             </th>
-
+            
             <th>
                 @Html.DisplayNameFor(model => model.LeaveRequests[0].Approved)
             </th>
-
+           
             <th></th>
         </tr>
     </thead>
     <tbody>
-
-
-        @if (Model.LeaveRequests.Count == 0)
+        @if (Model.LeaveRequests.Count < 0)
         {
 
 
             <tr>
                 <td>
-                    No Leave Application
+                   No Leave Application
                 </td>
                 <td>
             </tr>
-
-        }
-            else { 
-            @foreach (var item in Model.LeaveRequests)
-            {
-                <tr>
-                    <td>
-                        @item.Employee.Lastname @item.Employee.Firstname
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LeaveType.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StartDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EndDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DateRequested)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RelieverName)
-                    </td>
-
-                    <td>
-                        @if (item.Cancelled)
-                        {
-                            <span class="badge bg-warning w-50">Cancelled</span>
-                        }
-                        else if (item.Approved == null)
-                        {
-                            <span class="badge bg-warning w-50 ">Pending</span>
-                        }
-                        else if (item.Approved.Value)
-                        {
-                            <span class="badge bg-success w-50 ">Approved</span>
-                        }
-                        else if (!item.Approved.Value)
-                        {
-
-                            <span class="badge bg-success w-50">Rejected</span>
-                        }
-                        else
-                        {
-                            <span class="badge bg-warning w-50 ">Pending</span>
-                        }
-                    </td>
-
-                    <td>
-                        @if (item.Cancelled == false)
-                        {
-                            <a class="btn btn-info" asp-controller="LeaveRequests" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-info"></i></a>
-                        }
-                        @*<a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"> </i></a>*@
-                        @if (User.IsInRole(Roles.Administrator))
-                        {
-                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"> </i></a>
-                        }
-
-                    </td>
-                </tr>
+               
             }
-        } 
+            else
+            {
+                @foreach (var item in Model.LeaveRequests)
+            {
+            <tr>
+                <td>
+                    @item.Employee.Lastname @item.Employee.Firstname
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LeaveType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateRequested)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RelieverName)
+                </td>
+
+                <td>
+                    @if (item.Cancelled)
+                    {
+                        <span class="badge bg-warning w-50">Cancelled</span>
+                    }
+                    else if (item.Approved == null)
+                    {
+                        <span class="badge bg-warning w-50 ">Pending</span>
+                    }
+                    else if (item.Approved.Value)
+                    {
+                        <span class="badge bg-success w-50 ">Approved</span>
+                    }
+                    else if (!item.Approved.Value)
+                    {
+
+                        <span class="badge bg-success w-50">Rejected</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning w-50 ">Pending</span>
+                    }
+                </td>
+
+                <td>
+                    @if (item.Cancelled == false)
+                    {
+                        <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-info"></i></a>
+                        if (User.IsInRole(Roles.allApproval))
+                        {
+                            <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-eye"></i> Review</a>
+                        }
+                    }
+                    @*<a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"> </i></a>*@
+                    @if (User.IsInRole(Roles.Administrator))
+                    {
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"> </i></a>
+                    }
+
+                </td>
+            </tr>
+        }
+            }
     
     </tbody>
 </table>
