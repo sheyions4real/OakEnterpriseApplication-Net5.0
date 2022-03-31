@@ -1,4 +1,4 @@
-﻿@model LeaveManagement.Models.LeaveRequestVM
+﻿@model LeaveManagement.Common.Models.LeaveRequestVM
 
 @{
     ViewData["Title"] = "Edit";
@@ -13,6 +13,12 @@
     SelectList selectApproval = new SelectList(approvalItems, "Value", "Text", null);
 
 }
+
+
+
+<div class="card shadow-sm p-30">
+
+
 <h3>Edit Leave Request</h3>
 
 <h4>Approve or Reject Leave Application Request</h4>
@@ -456,3 +462,4 @@
 
 
 
+    </div>

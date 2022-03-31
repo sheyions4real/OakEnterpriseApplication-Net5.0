@@ -4,29 +4,34 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details of @Model.Name</h1>
+<div class="card shadow-sm p-30">
 
-<div>
-    <h4>LeaveType</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-5">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-7">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-5">
-            @Html.DisplayNameFor(model => model.DefaultDays)
-        </dt>
-        <dd class = "col-sm-7">
-            @Html.DisplayFor(model => model.DefaultDays)
-        </dd>
-        
-    </dl>
-</div>
-<div>
-    <a asp-action="Index" class="btn btn-dark">Back to List</a> &nbsp;  
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a> 
-    
+
+    <h1>Details of @Model.Name</h1>
+
+    <div>
+        <h4>LeaveType</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.DefaultDays)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.DefaultDays)
+            </dd>
+
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Index" class="btn btn-dark">Back to List</a> &nbsp;
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+
+    </div>
+
 </div>

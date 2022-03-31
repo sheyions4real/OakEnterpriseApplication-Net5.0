@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LeaveManagement.Data;
 using System.Collections;
-using LeaveManagement.Models;
-using LeaveManagement.Contracts;
+using LeaveManagement.Common.Models;
+using LeaveManagement.Application.Contracts;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Authorization;
-using LeaveManagement.Constants;
+using LeaveManagement.Common.Constants;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
@@ -104,7 +104,7 @@ namespace LeaveManagement.Controllers
             leaveRequest.MDEmployee = await employeeProfileRepository.GetEmployeeProfile(leaveRequest.MDEmployeeId);
             leaveRequest.EDEmployee = await employeeProfileRepository.GetEmployeeProfile(leaveRequest.EDEmployeeId);
            
-            leaveRequest.LoggedInUser = mapper.Map<EmployeeProfile>(user);
+            leaveRequest.LoggedInUser = mapper.Map<EmployeeProfileVM>(user);
 
             return View(leaveRequest);
         }
@@ -112,6 +112,7 @@ namespace LeaveManagement.Controllers
         // GET: LeaveRequests/Create
         public async Task<IActionResult> Create()
         {
+            var user = await userManager.GetUserAsync(httpContextAccessor?.HttpContext?.User);
             try
             {
                 var hrUserList = await employeeProfileRepository.GetUsersInRole(Roles.HR);
@@ -124,15 +125,19 @@ namespace LeaveManagement.Controllers
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now,
                     LeaveTypes = new SelectList(_context.LeaveTypes, "Id", "Name"),
-                    Relievers = new SelectList(_context.Staff.Where(q => q.DepartmentID == "235f3413-2f18-426f-9f20-944aad3a4623").ToList(), "Id", "Email"),
+                    HREmployeeList = new SelectList(await leaveRequestRepository.GetHRList(), "Id", "Email"),
+                    Relievers = new SelectList(_context.Staff.Where(q => q.DepartmentID == user.DepartmentID).ToList(), "Id", "Email"),
                     Supervisors = new SelectList(await leaveRequestRepository.GetSupervisors(), "Id", "Email"),
                     GroupHeads = new SelectList(await leaveRequestRepository.GetGroupHead(), "Id", "Email"),
                     DateRequested = DateTime.Now,
 
                 };
+
                 model.HREmployeeId = hrUserList.Count > 0 ? hrUserList[0].Id : "";
                 model.EDEmployeeId = EDUserList.Count > 0 ? EDUserList[0].Id : "";
                 model.MDEmployeeId = MDUserList.Count > 0 ? MDUserList[0].Id : "";
+               
+
 
                 ViewData["LeaveTypeId"] = new SelectList(_context.LeaveTypes, "Id", "Name"); // list to display the name of the leave
                 List<IEnumerable> list = new List<IEnumerable>();
@@ -208,7 +213,7 @@ namespace LeaveManagement.Controllers
             ViewData["LeaveTypeId"] = new SelectList(_context.LeaveTypes, "Id", "Id", leaveRequest.LeaveTypeId);
 
             var user = await userManager.GetUserAsync(httpContextAccessor?.HttpContext?.User);
-            leaveRequest.LoggedInUser = mapper.Map<EmployeeProfile>(user);
+            leaveRequest.LoggedInUser = mapper.Map<EmployeeProfileVM>(user);
 
 
             return View(leaveRequest);
@@ -255,7 +260,7 @@ namespace LeaveManagement.Controllers
             }
             ViewData["LeaveTypeId"] = new SelectList(_context.LeaveTypes, "Id", "Id", leaveRequest.LeaveTypeId);
             var user = await userManager.GetUserAsync(httpContextAccessor?.HttpContext?.User);
-            leaveRequest.LoggedInUser = mapper.Map<EmployeeProfile>(user);
+            leaveRequest.LoggedInUser = mapper.Map<EmployeeProfileVM>(user);
             return View(leaveRequest);
         }
 

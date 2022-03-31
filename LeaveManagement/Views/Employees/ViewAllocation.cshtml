@@ -1,119 +1,125 @@
-﻿@model LeaveManagement.Models.EmployeeAllocationVM
+﻿@model LeaveManagement.Common.Models.EmployeeAllocationVM
 
 @{
     ViewData["Title"] = "ViewAllocation";
 }
 
-<h3>View Leave Allocation for @Model.Lastname @Model.Firstname</h3>
 
-<div>
-    
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Firstname)
-        </dt>
-        <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.Firstname)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Lastname)
-        </dt>
-        <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.Lastname)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Othernames)
-        </dt>
-        <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.Othernames)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DepartmentID)
-        </dt>
-        <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.DepartmentID)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DateEmployed)
-        </dt>
-        <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.DateEmployed)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DateConfirmed)
-        </dt>
-        <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.DateConfirmed)
-        </dd>
-    </dl>
-</div>
+<div class="card shadow-sm p-30">
 
-<hr />
+    <h3>View Leave Allocation for @Model.Lastname @Model.Firstname</h3>
 
+    <div>
 
-
-<div class="card" >
-    <div class="card-header">
-        <h4> Leave Allocation</h4>
-       
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Firstname)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.Firstname)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Lastname)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.Lastname)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Othernames)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.Othernames)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DepartmentID)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.DepartmentID)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DateEmployed)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.DateEmployed)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DateConfirmed)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.DateConfirmed)
+            </dd>
+        </dl>
     </div>
-    <ul class="list-group list-group-flush">
 
-        <li class="list-group-item">
-            <div class="row text-center">
-                <div class="col">Leave Type</div>
-                <div class="col">Allocated Days</div>
-                <div class="col">Total Days Used</div>
-                <div class="col">Days brought Forward</div>
-                <div class="col">Public Holiday</div>
-                <div class="col">Action</div>
-            </div>
-        </li>
+    <hr />
 
-        @foreach (var allocation in Model.LeaveAllocations)
-        {
+
+
+    <div class="card">
+        <div class="card-header">
+            <h4> Leave Allocation</h4>
+
+        </div>
+        <ul class="list-group list-group-flush">
 
             <li class="list-group-item">
                 <div class="row text-center">
-                    <div class="col"><b> @allocation.LeaveType.Name - [@allocation.Period]</b> </div>
-
-                    <div class="col">
-                        <button type="button" class="btn btn-primary btn-sm  text-white ml-1">
-                           Days Assigned <span class="badge bg-danger text-white"> @allocation.LeaveType.DefaultDays</span>
-                        </button>
-                    </div>
-
-                    <div class="col">
-                        <button type="button" class="btn btn-secondary btn-sm   text-black ml-1">
-                            Days Used  <span class="badge bg-danger text-white"> @allocation.DaysUsed</span>
-                        </button>
-                    </div>
-                    <div class="col">
-                        <button type="button" class="btn btn-info btn-sm   text-black ml-1">
-                            Outstanding days <span class="badge bg-danger text-white"> @allocation.DaysBroughtForward</span>
-                        </button>
-                    </div>
-                    <div class="col">
-                        <button type="button" class="btn btn-success btn-sm   text-black ml-1">
-                            Public Holidays <span class="badge bg-danger text-white"> @allocation.PublicHolidays</span>
-                        </button>
-                    </div>
-                    <div class="col">
-                        <div class="" style="float:right;">
-                            <a class="btn btn-warning  btn-sm " asp-action="EditAllocation" asp-route-id="@allocation.Id"><i class="fa fa-pencil-alt"></i> Edit Leave Allocation</a>
-                        </div>
-                    </div>
+                    <div class="col">Leave Type</div>
+                    <div class="col">Allocated Days</div>
+                    <div class="col">Total Days Used</div>
+                    <div class="col">Days brought Forward</div>
+                    <div class="col">Public Holiday</div>
+                    <div class="col">Action</div>
                 </div>
             </li>
 
-        }
+            @foreach (var allocation in Model.LeaveAllocations)
+            {
 
-    </ul>
-</div>
-<br />
-<br />
-<div>
-  
-    <a asp-action="Index" class="btn btn-dark">Back to List</a>
+                <li class="list-group-item">
+                    <div class="row text-center">
+                        <div class="col"><b> @allocation.LeaveType.Name - [@allocation.Period]</b> </div>
+
+                        <div class="col">
+                            <button type="button" class="btn btn-primary btn-sm  text-white ml-1">
+                                Days Assigned <span class="badge bg-danger text-white"> @allocation.LeaveType.DefaultDays</span>
+                            </button>
+                        </div>
+
+                        <div class="col">
+                            <button type="button" class="btn btn-secondary btn-sm   text-black ml-1">
+                                Days Used  <span class="badge bg-danger text-white"> @allocation.DaysUsed</span>
+                            </button>
+                        </div>
+                        <div class="col">
+                            <button type="button" class="btn btn-info btn-sm   text-black ml-1">
+                                Outstanding days <span class="badge bg-danger text-white"> @allocation.DaysBroughtForward</span>
+                            </button>
+                        </div>
+                        <div class="col">
+                            <button type="button" class="btn btn-success btn-sm   text-black ml-1">
+                                Public Holidays <span class="badge bg-danger text-white"> @allocation.PublicHolidays</span>
+                            </button>
+                        </div>
+                        <div class="col">
+                            <div class="" style="float:right;">
+                                <a class="btn btn-warning  btn-sm " asp-action="EditAllocation" asp-route-id="@allocation.Id"><i class="fa fa-pencil-alt"></i> Edit Leave Allocation</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+            }
+
+        </ul>
+    </div>
+    <br />
+    <br />
+    <div>
+
+        <a asp-action="GetEmployees" class="btn btn-dark mr-2"><i class="fa fa-arrow-left-long"></i> Back to List </a>
+    </div>
+
+
 </div>

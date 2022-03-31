@@ -1,102 +1,106 @@
-﻿@model IEnumerable<LeaveManagement.Models.EmployeeProfileVM>
+﻿@model IEnumerable<LeaveManagement.Common.Models.EmployeeProfileVM>
 
 @{
     ViewData["Title"] = "GetEmployees";
 }
 
-<h1>Get Employees</h1>
+<div class="card shadow-sm p-30">
+    <h1>Get Employees</h1>
 
-<p>
-    <a class="btn btn-primary btn-sm" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Firstname)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Lastname)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Othernames)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DepartmentID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateEmployed)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <p>
+        <a class="btn btn-primary btn-sm" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+    </p>
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Firstname)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Lastname)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Othernames)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DepartmentID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateEmployed)
-                </td>
-
-                <td>
-                    <a class="btn btn-primary  btn-sm" asp-action="ViewAllocation" asp-route-id="@item.Id"><i class="fas fa-square-envelope"></i> View Allocation</a>
-                    <a class="btn btn-warning  btn-sm" asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i> </a>
-                    <a class="btn btn-info  btn-sm" asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-circle-info"></i> </a>
-                    @*<a asp-action="Delete" class="btn btn-danger deleteBtn" asp-route-id="@item.Id">Delete</a>*@
-                    <button data-id="@item.Id" class="btn btn-danger deleteBtn btn-sm" type="button"><i class="fas fa-trash-alt"></i> </button>
-                </td>
-
+                <th>
+                    @Html.DisplayNameFor(model => model.Firstname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Lastname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Othernames)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DepartmentID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateEmployed)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Firstname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Lastname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Othernames)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DepartmentID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateEmployed)
+                    </td>
 
-<form id="deleteForm" asp-action="Delete">
-    <input type="hidden" id="employeeId" name="Id" />
-</form>
+                    <td>
+                        <a class="btn btn-primary  btn-sm" asp-action="ViewAllocation" asp-route-id="@item.Id"><i class="fas fa-square-envelope"></i> View Allocation</a>
+                        <a class="btn btn-warning  btn-sm" asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i> </a>
+                        <a class="btn btn-info  btn-sm" asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-circle-info"></i> </a>
+                        @*<a asp-action="Delete" class="btn btn-danger deleteBtn" asp-route-id="@item.Id">Delete</a>*@
+                        <button data-id="@item.Id" class="btn btn-danger deleteBtn btn-sm" type="button"><i class="fas fa-trash-alt"></i> </button>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <form id="deleteForm" asp-action="Delete">
+        <input type="hidden" id="employeeId" name="Id" />
+    </form>
 
 
 
-@section Scripts{
-    <script>
-        $(function () {
-            
-            $('.deleteBtn').click(function (e) {
-                swal({
-                    title: "Are you sure?",
-                    text: "Are you sure you want to delete this record?",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true
-                }).then((confirm) => {
-                    if (confirm) {
-                        alert("you said yes");
-                        var btn = $(this);
-                        var id = btn.data("id");
-                        // get the value from the button and data-id attribute and assign it to the hidden field of the form and
-                        // then submit the form
-                        $('#employeeId').val(id);
-                        // submit the form to hit the delete endpoint
-                        ////  $('#deleteForm').submit();
-                    }
+    @section Scripts{
+        <script>
+            $(function () {
+
+                $('.deleteBtn').click(function (e) {
+                    swal({
+                        title: "Are you sure?",
+                        text: "Are you sure you want to delete this record?",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true
+                    }).then((confirm) => {
+                        if (confirm) {
+                            alert("you said yes");
+                            var btn = $(this);
+                            var id = btn.data("id");
+                            // get the value from the button and data-id attribute and assign it to the hidden field of the form and
+                            // then submit the form
+                            $('#employeeId').val(id);
+                            // submit the form to hit the delete endpoint
+                            ////  $('#deleteForm').submit();
+                        }
+                    });
                 });
+
+
+
             });
+        </script>
+
+    }
 
 
-
-        });
-    </script>
-
-}
+    </div>

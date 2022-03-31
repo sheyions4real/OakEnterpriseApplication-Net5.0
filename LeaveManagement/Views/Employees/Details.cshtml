@@ -1,0 +1,202 @@
+﻿@model LeaveManagement.Common.Models.EmployeeProfileVM
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="d-flex justify-content-between">
+
+
+    <div class="card shadow-sm p-30 col-4">
+
+      
+
+        <input type="hidden" asp-for="Id" />
+
+        <div class="row">
+            <div class="card-body">
+                <center class="mt-4">
+                    <img src="../../assets/images/users/avatar.png" class="rounded-circle" width="150">
+                    <h4 class="card-title mt-2">  @Html.DisplayFor(model => model.Title) @Html.DisplayFor(model => model.Lastname)  @Html.DisplayFor(model => model.Firstname)  @Html.DisplayFor(model => model.Othernames) </h4>
+                    <h6 class="card-subtitle"> @Html.DisplayFor(model => model.DepartmentID)</h6>
+
+                    @if (Model.Status == 1)
+                    {
+                        <div> Active </div>
+                    }
+                    else if (Model.Status == 2)
+                    {
+                        <div> Inactive </div>
+                    }
+                    else if (Model.Status == 3)
+                    {
+                        <div> Suspended </div>
+                    }
+                    else if (Model.Status == 4)
+                    {
+                        <div> Exited </div>
+                    }
+
+                    <div class="row text-center justify-content-md-center">
+                        <div class="col-4">   
+                                <i class="fa fa-person  align-middle"></i>
+                                <font class="font-medium">@Html.DisplayFor(model => model.Gender)</font>
+                        </div>
+                        <div class="col-4">
+                                <i class="fa fa-birthday-cake  align-middle"></i>
+                                <font class="font-medium">@Html.DisplayFor(model => model.DateOfBirth)</font>
+                        </div>
+                    </div>
+                </center>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+
+            <div class="card-body">
+                <small class="text-muted">Email address </small>
+                <h6>@Html.DisplayFor(model => model.Email)</h6>
+                <small class="text-muted pt-4 db">Phone</small>
+                <h6>@Html.DisplayFor(model => model.Mobile_Phone)</h6>
+                <small class="text-muted pt-4 db">Address</small>
+                <h6>@Html.DisplayFor(model => model.Address1)  @Html.DisplayFor(model => model.Address2) <br />  @Html.DisplayFor(model => model.City) <br /> @Html.DisplayFor(model => model.State) @Html.DisplayFor(model => model.Country)</h6>
+               
+            </div>
+        </div>
+
+
+        </div>
+
+        <div class="card shadow-sm p-30 col-8 ml-3">
+            <div class="row">
+                <div class="card-body">
+                    <h4 class="card-title mt-2">Educational Records  </h4>
+                    <h6 class="card-subtitle">Academic Qualifications</h6>
+                    @*@Html.DisplayFor(model => model.DepartmentID)*@
+                    No Information Uploaded
+                </div>
+
+            </div>
+
+
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Confirmed" class="control-label"></label>
+                                    <input asp-for="Confirmed" class="form-control" disabled />
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Level_Of_Entry" class="control-label"></label>
+                                    <input asp-for="Level_Of_Entry" class="form-control" disabled />
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Position" class="control-label"></label>
+                                    <input asp-for="Position" class="form-control" disabled/>
+
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="branch" class="control-label"></label>
+                                    <input asp-for="branch" class="form-control" disabled/>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Rsa_Pin" class="control-label"></label>
+                                    <input asp-for="Rsa_Pin" class="form-control" disabled/>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Status" class="control-label"></label>
+                                    <input asp-for="Status" class="form-control" disabled />
+
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="DateEmployed" class="control-label"></label>
+                                    <input asp-for="DateEmployed" class="form-control" disabled/>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="DateConfirmed" class="control-label"></label>
+                                    <input asp-for="DateConfirmed" class="form-control" disabled/>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="TaxID" class="control-label"></label>
+                                    <input asp-for="TaxID" class="form-control" disabled />
+
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="DateOfBirth" class="control-label"></label>
+                                    <input asp-for="DateOfBirth" class="form-control" disabled/>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="DateCreated" class="control-label"></label>
+                                    <input asp-for="DateCreated" class="form-control"  disabled/>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="DateUpdated" class="control-label"></label>
+                                    <input asp-for="DateUpdated" class="form-control" disabled />
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <hr />
+                        <div class="row">
+
+                            <form action="" method="post">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="hidden" asp-for="Id" />
+                                        <a asp-action="GetEmployees" class="btn btn-dark mr-2"><i class="fa fa-arrow-left-long"></i> Back to List </a>
+                                        <input type="submit" class="btn btn-primary" value="Update Profile" asp-action="Edit">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <br />
+
+                </div>
+
+
+    </div>

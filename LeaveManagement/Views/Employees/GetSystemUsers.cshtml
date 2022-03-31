@@ -1,14 +1,15 @@
-﻿@model LeaveManagement.Models.UserByRoles
+﻿@model LeaveManagement.Common.Models.UserByRoles
 
 @{
     ViewData["Title"] = "System Users By Roles";
 }
 
-<h4>System Users By Roles</h4>
+<div class="card shadow-sm p-30">
+    <h4>System Users By Roles</h4>
 
-<p>
-    <a class="btn btn-primary btn-sm" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
-</p>
+    <p>
+        <a class="btn btn-primary btn-sm" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+    </p>
 
     <div class="container-fluid">
         <div class="row">
@@ -146,7 +147,7 @@
                         {
                             <tr>
                                 <td>
-                                   No Supervisor Record Found
+                                    No Supervisor Record Found
                                 </td>
                             </tr>
                         }
@@ -159,11 +160,13 @@
         </div>
     </div>
 
-@section Scripts{
-<script>
-    $(function () {
-        
+    @section Scripts{
+        <script>
+            $(function () {
+
+            }
+        </script>
     }
-</script>
-}
-    
+
+
+    </div>

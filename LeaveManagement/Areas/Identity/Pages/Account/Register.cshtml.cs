@@ -14,10 +14,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using LeaveManagement.Constants;
-using LeaveManagement.Contracts;
+using LeaveManagement.Common.Constants;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using LeaveManagement.Application.Contracts;
 
 namespace LeaveManagement.Areas.Identity.Pages.Account
 {

@@ -4,76 +4,77 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>LeaveAllocation</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="DaysAllocated" class="control-label"></label>
-                <input asp-for="DaysAllocated" class="form-control" />
-                <span asp-validation-for="DaysAllocated" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DaysUsed" class="control-label"></label>
-                <input asp-for="DaysUsed" class="form-control" />
-                <span asp-validation-for="DaysUsed" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PublicHolidays" class="control-label"></label>
-                <input asp-for="PublicHolidays" class="form-control" />
-                <span asp-validation-for="PublicHolidays" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DaysBroughtForward" class="control-label"></label>
-                <input asp-for="DaysBroughtForward" class="form-control" />
-                <span asp-validation-for="DaysBroughtForward" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LeaveTypeId" class="control-label"></label>
-                <select asp-for="LeaveTypeId" class ="form-control" asp-items="ViewBag.LeaveTypeId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="EmployeeId" class="control-label"></label>
-                <input asp-for="EmployeeId" class="form-control" />
-                <span asp-validation-for="EmployeeId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Period" class="control-label"></label>
-                <input asp-for="Period" class="form-control" />
-                <span asp-validation-for="Period" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Start_Date" class="control-label"></label>
-                <input asp-for="Start_Date" class="form-control" />
-                <span asp-validation-for="Start_Date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="End_Date" class="control-label"></label>
-                <input asp-for="End_Date" class="form-control" />
-                <span asp-validation-for="End_Date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateCreated" class="control-label"></label>
-                <input asp-for="DateCreated" class="form-control" />
-                <span asp-validation-for="DateCreated" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateModified" class="control-label"></label>
-                <input asp-for="DateModified" class="form-control" />
-                <span asp-validation-for="DateModified" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="card shadow-sm p-30">
+    <h4>Create Leave Allocation</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="DaysAllocated" class="control-label"></label>
+                    <input asp-for="DaysAllocated" class="form-control" />
+                    <span asp-validation-for="DaysAllocated" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DaysUsed" class="control-label"></label>
+                    <input asp-for="DaysUsed" class="form-control" />
+                    <span asp-validation-for="DaysUsed" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PublicHolidays" class="control-label"></label>
+                    <input asp-for="PublicHolidays" class="form-control" />
+                    <span asp-validation-for="PublicHolidays" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DaysBroughtForward" class="control-label"></label>
+                    <input asp-for="DaysBroughtForward" class="form-control" />
+                    <span asp-validation-for="DaysBroughtForward" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LeaveTypeId" class="control-label"></label>
+                    <select asp-for="LeaveTypeId" class="form-control" asp-items="ViewBag.LeaveTypeId"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmployeeId" class="control-label"></label>
+                    <input asp-for="EmployeeId" class="form-control" />
+                    <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Period" class="control-label"></label>
+                    <input asp-for="Period" class="form-control" />
+                    <span asp-validation-for="Period" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Start_Date" class="control-label"></label>
+                    <input asp-for="Start_Date" class="form-control" />
+                    <span asp-validation-for="Start_Date" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="End_Date" class="control-label"></label>
+                    <input asp-for="End_Date" class="form-control" />
+                    <span asp-validation-for="End_Date" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateCreated" class="control-label"></label>
+                    <input asp-for="DateCreated" class="form-control" />
+                    <span asp-validation-for="DateCreated" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateModified" class="control-label"></label>
+                    <input asp-for="DateModified" class="form-control" />
+                    <span asp-validation-for="DateModified" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
 
+    </div>

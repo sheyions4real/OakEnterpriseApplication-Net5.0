@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using LeaveManagement.Constants;
-using LeaveManagement.Contracts;
+using LeaveManagement.Common.Constants;
+using LeaveManagement.Application.Contracts;
 using LeaveManagement.Data;
-using LeaveManagement.Models;
-using LeaveManagement.Repositories;
+using LeaveManagement.Common.Models;
+using LeaveManagement.Application.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -80,6 +80,87 @@ namespace LeaveManagement.Controllers
             
 
             return View(employeesViewModel);
+        }
+
+        public async Task<ActionResult> Details(string id)
+        {
+            var employee = await employeeProfileRepository.GetEmployeeProfile(id);
+          if(employee == null)
+            {
+                return NotFound();
+            }
+                // get the deparment description
+           employee.DepartmentID = await departmentRepository.GetDepartmentName(employee.DepartmentID);
+            
+            return View(employee);
+        }
+
+
+
+
+        // GET: EmployeesController/Delete/5
+        public async Task<ActionResult> Edit(string id)
+        {
+            var user =  await employeeProfileRepository.GetEmployeeProfile(id);
+
+            if(user == null)
+            {
+            
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+
+
+        // POST: EmployeesController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(int id, EmployeeProfileVM modelVM)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var model = mapper.Map<EmployeeProfile>(modelVM);
+                    await employeeProfileRepository.UpdateAsync(model);
+                    
+                        return RedirectToAction(nameof(Details), new { id = modelVM.Id });
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, "An Error Has Occured. Please Try Again Later");
+            }
+           // modelVM.Employee = mapper.Map<EmployeeProfileVM>(await employeeProfileRepository.GetEmployeeProfile(model.EmployeeId));
+           // modelVM.LeaveType = mapper.Map<LeaveTypeVM>(await leaveTypeRepository.GetAsync(model.LeaveTypeId));
+            return View(modelVM);
+        }
+
+
+
+
+
+
+        public async Task<ActionResult> GetDepartments()
+        {
+            var departments = await departmentRepository.GetAllAsync();
+            foreach (var dept in departments)
+            {
+                // get the deparment description
+                var hod = await employeeProfileRepository.GetEmployeeProfile(dept.HOD);
+                if(hod != null)
+                {
+                    dept.HOD = hod?.Lastname + " " + hod?.Firstname;
+                }
+                
+            }
+            var deptVM = mapper.Map<List<DepartmentVM>>(departments);
+
+
+            return View(deptVM);
         }
 
 

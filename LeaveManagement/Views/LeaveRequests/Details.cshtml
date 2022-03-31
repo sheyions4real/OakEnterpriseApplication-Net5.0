@@ -1,4 +1,4 @@
-﻿@model LeaveManagement.Models.LeaveRequestVM
+﻿@model LeaveManagement.Common.Models.LeaveRequestVM
 
 @{
     ViewData["Title"] = "Leave Request Details";
@@ -20,455 +20,460 @@
     }
 }
 
-<h4>Leave Request Details</h4>
+
+<div class="card shadow-sm p-30">
+    <h4>Leave Request Details</h4>
 
 
-<div class="alert alert-@className" role="alert">
-    <h4 class="alert-heading">@headerText</h4>
-    <hr />
+    <div class="alert alert-@className" role="alert">
+        <h4 class="alert-heading">@headerText</h4>
+        <hr />
 
-    <p>
-        <strong>Employee Name: </strong>@Model.Employee.Lastname @Model.Employee.Firstname
-    </p>
+        <p>
+            <strong>Employee Name: </strong>@Model.Employee.Lastname @Model.Employee.Firstname
+        </p>
 
-    <hr />
+        <hr />
 
-    <p>
-        <strong>Date Requested: </strong>@Html.DisplayFor(model => model.DateRequested)
-    </p>
-
-</div>
-
-
-
-<div>
-
-    <hr />
-    <div class="row">
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-
-                <div class="control-label"> @Html.DisplayNameFor(model => model.EmployeeId) : </div>
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.EmployeeId, new { @class = "form-control col-md-6" })
-                </div>
-
-            </div>
-        </div>
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label"> @Html.DisplayNameFor(model => model.LeaveType) : </div>
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.LeaveType.Id)
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-
-
-                <div class="control-label"> @Html.DisplayNameFor(model => model.TotalDaysRequested): </div>
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.TotalDaysRequested, new { @class = "form-control col-md-6" })
-                </div>
-            </div>
-        </div>
+        <p>
+            <strong>Date Requested: </strong>@Html.DisplayFor(model => model.DateRequested)
+        </p>
 
     </div>
 
 
-    <div class="row">
 
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label">@Html.DisplayNameFor(model => model.TotalOutstanding): </div>
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.TotalOutstanding, new { @class = "form-control col-md-6" })
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-
-
-                <div class="control-label">@Html.DisplayNameFor(model => model.TotalPublicHolidays): </div>
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.TotalPublicHolidays, new { @class = "form-control col-md-6" })
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group ">
-                <div class="control-label">@Html.DisplayNameFor(model => model.LeaveYear) </div>
-                <div class="form-control"> @Html.DisplayFor(model => model.LeaveYear)</div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row">
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label">@Html.DisplayNameFor(model => model.StartDate): </div>
-
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.StartDate)
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label"> @Html.DisplayNameFor(model => model.EndDate): </div>
-
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.EndDate)
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label"> @Html.DisplayNameFor(model => model.DateRequested): </div>
-
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.DateRequested)
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-    <div class="row">
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label"> @Html.DisplayNameFor(model => model.RelieverID): </div>
-
-
-                <div class="form-control">
-                    @Model.Reliever.Lastname  @Model.Reliever.Firstname
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label">@Html.DisplayNameFor(model => model.Comment): </div>
-
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.Comment)
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label"> @Html.DisplayNameFor(model => model.SupervisorEmployeeId): </div>
-
-
-                <div class="form-control">
-                    @Model.SupervisorEmployee?.Lastname  @Model.SupervisorEmployee?.Firstname
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div class="row">
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label"> @Html.DisplayNameFor(model => model.SupervisorApproval): </div>
-
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.SupervisorApproval)
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label">@Html.DisplayNameFor(model => model.SupervisorComment): </div>
-
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.SupervisorComment)
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label">@Html.DisplayNameFor(model => model.HREmployeeId): </div>
-
-                <div class="form-control">
-                    @Model.HREmployee?.Lastname  @Model.HREmployee?.Firstname
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-    <div class="row">
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label"> @Html.DisplayNameFor(model => model.HRApproval): </div>
-
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.HRApproval)
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label">  @Html.DisplayNameFor(model => model.HRComment): </div>
-
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.HRComment)
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label">    @Html.DisplayNameFor(model => model.GroupHeadEmployeeId): </div>
-
-
-                <div class="form-control">
-                    @Model.GroupHeadEmployee?.Lastname  @Model.GroupHeadEmployee?.Firstname
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-
-
-    <div class="row">
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label">@Html.DisplayNameFor(model => model.EDApproval): </div>
-
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.EDApproval)
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label">  @Html.DisplayNameFor(model => model.EDComment): </div>
-
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.EDComment)
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label">   @Html.DisplayNameFor(model => model.EDEmployeeId): </div>
-
-
-                <div class="form-control">
-                    @Model.EDEmployee?.Lastname  @Model.EDEmployee?.Firstname
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-    <div class="row">
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label">@Html.DisplayNameFor(model => model.GroupHeadApproval): </div>
-
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.GroupHeadApproval)
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label">  @Html.DisplayNameFor(model => model.GHComment): </div>
-
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.GHComment)
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label">   @Html.DisplayNameFor(model => model.MDEmployeeId): </div>
-
-
-                <div class="form-control">
-                    @Model.MDEmployee?.Lastname  @Model.MDEmployee?.Firstname
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row">
-
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label">@Html.DisplayNameFor(model => model.MDApproval): </div>
-
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.MDApproval)
-                </div>
-            </div>
-        </div>
-
-
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label"> @Html.DisplayNameFor(model => model.MDComment): </div>
-
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.MDComment)
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label">     @Html.DisplayNameFor(model => model.Approved): </div>
-
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.Approved)
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div class="row">
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label">  @Html.DisplayNameFor(model => model.Cancelled): </div>
-
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.Cancelled)
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label">  @Html.DisplayNameFor(model => model.DateCreated): </div>
-
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.DateCreated)
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <div class="form-group">
-                <div class="control-label"> @Html.DisplayNameFor(model => model.DateModified): </div>
-
-
-                <div class="form-control">
-                    @Html.DisplayFor(model => model.DateModified)
-                </div>
-            </div>
-        </div>
-
-
-    </div>
     <div>
-        <a asp-action="Index" asp-controller="Home" class="btn btn-dark"> <i class="fa fa-arrow-left-long"></i> Back to List</a>
 
-        @*@if (User.IsInRole(Roles.allApproval))*@
-        @if (Model.LoggedInUser.Id == Model.SupervisorEmployeeId || Model.LoggedInUser.Id == Model.HREmployeeId || Model.LoggedInUser.Id == Model.GroupHeadEmployeeId || Model.LoggedInUser.Id == Model.EDEmployeeId || Model.LoggedInUser.Id == Model.MDEmployeeId)
-        {
-            <a class="btn btn-success" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-eye"></i> Review</a>
-        }
+        <hr />
+        <div class="row">
 
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+
+                    <div class="control-label"> @Html.DisplayNameFor(model => model.EmployeeId) : </div>
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.EmployeeId, new { @class = "form-control col-md-6" })
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label"> @Html.DisplayNameFor(model => model.LeaveType) : </div>
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.LeaveType.Id)
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+
+
+                    <div class="control-label"> @Html.DisplayNameFor(model => model.TotalDaysRequested): </div>
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.TotalDaysRequested, new { @class = "form-control col-md-6" })
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label">@Html.DisplayNameFor(model => model.TotalOutstanding): </div>
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.TotalOutstanding, new { @class = "form-control col-md-6" })
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+
+
+                    <div class="control-label">@Html.DisplayNameFor(model => model.TotalPublicHolidays): </div>
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.TotalPublicHolidays, new { @class = "form-control col-md-6" })
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group ">
+                    <div class="control-label">@Html.DisplayNameFor(model => model.LeaveYear) </div>
+                    <div class="form-control"> @Html.DisplayFor(model => model.LeaveYear)</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label">@Html.DisplayNameFor(model => model.StartDate): </div>
+
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.StartDate)
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label"> @Html.DisplayNameFor(model => model.EndDate): </div>
+
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.EndDate)
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label"> @Html.DisplayNameFor(model => model.DateRequested): </div>
+
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.DateRequested)
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row">
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label"> @Html.DisplayNameFor(model => model.RelieverID): </div>
+
+
+                    <div class="form-control">
+                        @Model.Reliever.Lastname  @Model.Reliever.Firstname
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label">@Html.DisplayNameFor(model => model.Comment): </div>
+
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.Comment)
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label"> @Html.DisplayNameFor(model => model.SupervisorEmployeeId): </div>
+
+
+                    <div class="form-control">
+                        @Model.SupervisorEmployee?.Lastname  @Model.SupervisorEmployee?.Firstname
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label"> @Html.DisplayNameFor(model => model.SupervisorApproval): </div>
+
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.SupervisorApproval)
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label">@Html.DisplayNameFor(model => model.SupervisorComment): </div>
+
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.SupervisorComment)
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label">@Html.DisplayNameFor(model => model.HREmployeeId): </div>
+
+                    <div class="form-control">
+                        @Model.HREmployee?.Lastname  @Model.HREmployee?.Firstname
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row">
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label"> @Html.DisplayNameFor(model => model.HRApproval): </div>
+
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.HRApproval)
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label">  @Html.DisplayNameFor(model => model.HRComment): </div>
+
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.HRComment)
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label">    @Html.DisplayNameFor(model => model.GroupHeadEmployeeId): </div>
+
+
+                    <div class="form-control">
+                        @Model.GroupHeadEmployee?.Lastname  @Model.GroupHeadEmployee?.Firstname
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="row">
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label">@Html.DisplayNameFor(model => model.EDApproval): </div>
+
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.EDApproval)
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label">  @Html.DisplayNameFor(model => model.EDComment): </div>
+
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.EDComment)
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label">   @Html.DisplayNameFor(model => model.EDEmployeeId): </div>
+
+
+                    <div class="form-control">
+                        @Model.EDEmployee?.Lastname  @Model.EDEmployee?.Firstname
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="row">
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label">@Html.DisplayNameFor(model => model.GroupHeadApproval): </div>
+
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.GroupHeadApproval)
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label">  @Html.DisplayNameFor(model => model.GHComment): </div>
+
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.GHComment)
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label">   @Html.DisplayNameFor(model => model.MDEmployeeId): </div>
+
+
+                    <div class="form-control">
+                        @Model.MDEmployee?.Lastname  @Model.MDEmployee?.Firstname
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label">@Html.DisplayNameFor(model => model.MDApproval): </div>
+
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.MDApproval)
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label"> @Html.DisplayNameFor(model => model.MDComment): </div>
+
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.MDComment)
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label">     @Html.DisplayNameFor(model => model.Approved): </div>
+
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.Approved)
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label">  @Html.DisplayNameFor(model => model.Cancelled): </div>
+
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.Cancelled)
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label">  @Html.DisplayNameFor(model => model.DateCreated): </div>
+
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.DateCreated)
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="form-group">
+                    <div class="control-label"> @Html.DisplayNameFor(model => model.DateModified): </div>
+
+
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.DateModified)
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div>
+            <a asp-action="Index" asp-controller="Home" class="btn btn-dark"> <i class="fa fa-arrow-left-long"></i> Back to List</a>
+
+            @*@if (User.IsInRole(Roles.allApproval))*@
+            @if (Model.LoggedInUser.Id == Model.SupervisorEmployeeId || Model.LoggedInUser.Id == Model.HREmployeeId || Model.LoggedInUser.Id == Model.GroupHeadEmployeeId || Model.LoggedInUser.Id == Model.EDEmployeeId || Model.LoggedInUser.Id == Model.MDEmployeeId)
+            {
+                <a class="btn btn-success" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-eye"></i> Review</a>
+            }
+
+
+        </div>
 
     </div>
+
 
 </div>

@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LeaveManagement.Data;
 using AutoMapper;
-using LeaveManagement.Models;
-using LeaveManagement.Contracts;
+using LeaveManagement.Common.Models;
+using LeaveManagement.Application.Contracts;
 using Microsoft.AspNetCore.Authorization;
-using LeaveManagement.Constants;
+using LeaveManagement.Common.Constants;
 
 namespace LeaveManagement.Controllers
 {

@@ -6,16 +6,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LeaveManagement.Data;
+using LeaveManagement.Application.Contracts;
 
 namespace LeaveManagement.Controllers
 {
     public class LeaveAllocationsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IEmployeeProfileRepository employeeProfileRepository;
+        private readonly ILeaveTypeRepository leaveTypeRepository;
 
-        public LeaveAllocationsController(ApplicationDbContext context)
+        public LeaveAllocationsController(ApplicationDbContext context, IEmployeeProfileRepository employeeProfileRepository,
+            ILeaveTypeRepository leaveTypeRepository)
         {
             _context = context;
+            this.employeeProfileRepository = employeeProfileRepository;
+            this.leaveTypeRepository = leaveTypeRepository;
         }
 
 
@@ -26,8 +32,17 @@ namespace LeaveManagement.Controllers
         // GET: LeaveAllocations
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.LeaveAllocations.Include(l => l.LeaveType);
-            return View(await applicationDbContext.ToListAsync());
+            var leaveAllocations = _context.LeaveAllocations.Include(l => l.LeaveType);
+            if(leaveAllocations != null)
+            {
+                foreach (var allocation in leaveAllocations)
+                {
+                   var employee = await employeeProfileRepository.GetEmployeeProfile(allocation.EmployeeId);
+                    allocation.EmployeeId = employee.Lastname + " " + employee.Firstname;
+                    allocation.LeaveType = await leaveTypeRepository.GetAsync(allocation.LeaveTypeId);
+                }
+            }
+            return View(await leaveAllocations.ToListAsync());
         }
 
         // GET: LeaveAllocations/Details/5

@@ -6,166 +6,192 @@
 
 <h3> My Leave Dashboard</h3>
 
+<div class="card shadow-sm p-30">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card ">
 
-<div class="row">
-    <div class="col-md-3">
-        <div class="card">
+                <div class="card-body bg-info d-flex justify-content-between">
+                    <div>
+                        <h1 class="card-title text-white">@Model.TotalRequests</h1>
+                        <p class="card-text text-white h5">Total Leave <br> Request</p>
+                        <hr style=" height:1.2px; width:25%;" class="bg-danger" />
+                    </div>
+                    <div class="mt-3 mr-3">
+                        <h1 style="font-size:50px;"> <i class="fa fa-file-prescription text-white"></i></h1>
+                    </div>
+                </div>
 
-            <div class="card-body bg-info">
-                <h1 class="card-title text-danger">@Model.TotalRequests</h1>
-                <p class="card-text text-danger h5">@Html.DisplayNameFor(model => model.TotalRequests)</p>
-                <hr style=" height:1.2px; width:25%;" class="bg-danger" />
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card">
+
+                <div class="card-body bg-success d-flex justify-content-between">
+                    <div>
+                        <h1 class="card-title text-white">@Model.ApprovedRequest</h1>
+                        <p class="card-text text-white h5">Approved <br> Request</p>
+                        <hr style=" height:1.2px; width:25%;" class="bg-white" />
+                    </div>
+                    <div class="mt-3 mr-3">
+                        <h1 style="font-size:50px;"> <i class="fa fa-check-square text-white"></i></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card">
+
+                <div class="card-body bg-warning d-flex justify-content-between">
+                    <div>
+
+                        <h1 class="card-title text-white">@Model.PendingRequests</h1>
+                        <p class="card-text h5 text-white">Pending<br> Request</p>
+                        <hr style=" height:1.2px; width:25%;" class="bg-success" />
+                    </div>
+                    <div class="mt-3 mr-3">
+                        <h1 style="font-size:48px;"> <i class="fa fa-pen-nib text-white"></i></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card">
+
+                <div class="card-body bg-danger d-flex justify-content-between">
+                    <div>
+
+                        <h1 class="card-title text-white">@Model.RejectedRequests</h1>
+                        <p class="card-text text-white h5">Rejected<br>Request</p>
+                        <hr style=" height:1.2px; width:25%;" class="bg-white" />
+                    </div>
+                    <div class="mt-3 mr-3">
+                        <h1 style="font-size:48px;"> <i class="fa fa-cancel text-white"></i></h1>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="col-md-3">
-        <div class="card">
-
-            <div class="card-body bg-success">
-                <h1 class="card-title text-white">@Model.ApprovedRequest</h1>
-                <p class="card-text text-white h5">@Html.DisplayNameFor(model => model.ApprovedRequest)</p>
-                <hr style=" height:1.2px; width:25%;" class="bg-white" />
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="card">
-
-            <div class="card-body bg-warning">
-                <h1 class="card-title text-success">@Model.PendingRequests</h1>
-                <p class="card-text h5 text-success">@Html.DisplayNameFor(model => model.PendingRequests)</p>
-                <hr style=" height:1.2px; width:25%;" class="bg-success" />
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="card">
-
-            <div class="card-body bg-danger">
-                <h1 class="card-title text-white">@Model.RejectedRequests</h1>
-                <p class="card-text text-white h5">@Html.DisplayNameFor(model => model.RejectedRequests)</p>
-                <hr style=" height:1.2px; width:25%;" class="bg-white" />
-            </div>
-        </div>
-    </div>
 </div>
 
-<br />
-<br />
-<hr />
 
 
-<h3>My Leave Records</h3>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Employee
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LeaveRequests[0].LeaveType.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LeaveRequests[0].StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LeaveRequests[0].EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LeaveRequests[0].DateRequested)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LeaveRequests[0].RelieverID)
-            </th>
+<div class="card shadow-sm p-30">
+    <h3>My Leave Records</h3>
 
-            <th>
-                @Html.DisplayNameFor(model => model.LeaveRequests[0].Approved)
-            </th>
-
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-
-
-        @if (Model.LeaveRequests.Count == 0)
-        {
-
-
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    No Leave Application
-                </td>
-                <td>
-            </tr>
+                <th>
+                    Employee
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LeaveRequests[0].LeaveType.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LeaveRequests[0].StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LeaveRequests[0].EndDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LeaveRequests[0].DateRequested)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LeaveRequests[0].RelieverID)
+                </th>
 
-        }
-            else { 
-            @foreach (var item in Model.LeaveRequests)
+                <th>
+                    @Html.DisplayNameFor(model => model.LeaveRequests[0].Approved)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            @if (Model.LeaveRequests.Count == 0)
             {
+
+
                 <tr>
                     <td>
-                        @item.Employee.Lastname @item.Employee.Firstname
+                        No Leave Application
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.LeaveType.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StartDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EndDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DateRequested)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RelieverName)
-                    </td>
-
-                    <td>
-                        @if (item.Cancelled)
-                        {
-                            <span class="badge bg-warning w-50">Cancelled</span>
-                        }
-                        else if (item.Approved == null)
-                        {
-                            <span class="badge bg-warning w-50 ">Pending</span>
-                        }
-                        else if (item.Approved.Value)
-                        {
-                            <span class="badge bg-success w-50 ">Approved</span>
-                        }
-                        else if (!item.Approved.Value)
-                        {
-
-                            <span class="badge bg-success w-50">Rejected</span>
-                        }
-                        else
-                        {
-                            <span class="badge bg-warning w-50 ">Pending</span>
-                        }
-                    </td>
-
-                    <td>
-                        @if (item.Cancelled == false)
-                        {
-                            <a class="btn btn-info" asp-controller="LeaveRequests" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-info"></i></a>
-                        }
-                        @*<a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"> </i></a>*@
-                        @if (User.IsInRole(Roles.Administrator))
-                        {
-                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"> </i></a>
-                        }
-
-                    </td>
                 </tr>
+
             }
-        } 
-    
-    </tbody>
-</table>
+            else
+            {
+                @foreach (var item in Model.LeaveRequests)
+                {
+                    <tr>
+                        <td>
+                            @item.Employee.Lastname @item.Employee.Firstname
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LeaveType.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateRequested)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RelieverName)
+                        </td>
+
+                        <td>
+                            @if (item.Cancelled)
+                            {
+                                <span class="badge bg-warning w-50">Cancelled</span>
+                            }
+                            else if (item.Approved == null)
+                            {
+                                <span class="badge bg-warning w-50 ">Pending</span>
+                            }
+                            else if (item.Approved.Value)
+                            {
+                                <span class="badge bg-success w-50 ">Approved</span>
+                            }
+                            else if (!item.Approved.Value)
+                            {
+
+                                <span class="badge bg-success w-50">Rejected</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning w-50 ">Pending</span>
+                            }
+                        </td>
+
+                        <td>
+                            @if (item.Cancelled == false)
+                            {
+                                <a class="btn btn-info" asp-controller="LeaveRequests" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-info"></i></a>
+                            }
+                            @*<a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"> </i></a>*@
+                            @if (User.IsInRole(Roles.Administrator))
+                            {
+                                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"> </i></a>
+                            }
+
+                        </td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+ </div>
